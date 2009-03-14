@@ -8,8 +8,8 @@
   author="Ergast"
   author_affiliation="ergast.com"
   author_email="ergast.com+nospam@googlemail.com"
-  screenshot="http://ergast.com/gadget/280x260.png"
-  thumbnail="http://ergast.com/gadget/120x60.png"
+  screenshot="http://ergast.googlecode.com/svn/trunk/gadget/280x260.png"
+  thumbnail="http://ergast.googlecode.com/svn/trunk/gadget/120x60.png"
 >
   <Require feature="tabs"/>
   <Require feature="dynamic-height" />
