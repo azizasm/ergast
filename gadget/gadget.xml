@@ -2,7 +2,7 @@
 <Module>
 <ModulePrefs 
   title="F1 Standings &amp; Results" 
-  title_url="http://ergast.com/mrd/query" 
+  title_url="http://ergast.com/mrd/gallery#gadget" 
   height="250"
   description="Latest Formula One standings and results. Click on the arrows for previous F1 races and seasons."
   author="Ergast"
