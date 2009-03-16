@@ -320,7 +320,6 @@
     if(json != null || json.length == 0) {
       var response = parseJSON(json);
       schedules[response.MRData.RaceTable.season] = response.MRData.RaceTable.Races;
-      redraw();
     }
   }
   
