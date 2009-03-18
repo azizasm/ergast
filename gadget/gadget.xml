@@ -107,14 +107,11 @@
     year = "current";
     round = "last";
     limit = prefs.getInt("limit");
-    var scheduleRequest = root + "current.json";
-    _IG_FetchContent(scheduleRequest, parseCurrentSchedule);
-    var nextRequest = root + "current/next.json";
-    _IG_FetchContent(nextRequest, parseNext);
     tabs = new _IG_Tabs(__MODULE_ID__, prefs.getString("initialTab"), _gel("tabs"));
     tabs.addDynamicTab("Driver Standings", driverStandings);
     tabs.addDynamicTab("Constructor Standings", constructorStandings);
     tabs.addDynamicTab("Race Results", raceResults);
+    getNext();
   }
  
   function driverStandings(tabId) {
@@ -139,6 +136,7 @@
   }
 
   function redraw() {
+    getSelector();
     switch(selectedTab) {
       case 0:
         getDriverStandings(year, round);
@@ -155,7 +153,6 @@
   }
 
   function getDriverStandings(year, round) {
-    drawSelector(year, round);
     if(year != "current" && round != "last") {
       var yearDS = allDS[year];
       if(yearDS != null) {
@@ -176,7 +173,6 @@
   }
   
   function getConstructorStandings(year, round) {
-    drawSelector(year, round);
     if(year != "current" && round != "last") {
       var yearCS = allCS[year];
       if(yearCS != null) {
@@ -197,7 +193,6 @@
   }
   
   function getRaceResults(year, round) {
-    drawSelector(year, round);
     if(year != "current" && round != "last") {
       var yearRR = allRR[year];
       if(yearRR != null) {
@@ -215,6 +210,30 @@
     } else {
       _IG_FetchContent(request, parseRaceResults);
     }
+  }
+  
+  function getSelector() {
+    if(year == "current") {
+      var scheduleRequest = root + "current.json";
+      _IG_FetchContent(scheduleRequest, parseCurrentSchedule);    
+    } else {
+      if(round == "last" && lastRounds[year] != null) round = lastRounds[year];
+      var races = schedules[year];
+      if(races != null && round != null) {
+        var races = schedules[year];
+        if(races != null) {
+          drawSelector(year, round);
+          return;
+        }
+      }
+      var request = root + year + ".json";
+      _IG_FetchContent(request, parseSchedule);
+    }
+  }
+  
+  function getNext() {
+    var nextRequest = root + "current/next.json";
+    _IG_FetchContent(nextRequest, parseNext);
   }
   
   function parseLastDriverStandings(json) {
@@ -313,6 +332,7 @@
       year = response.MRData.RaceTable.season;
       currentYear = year;
       schedules[year] = response.MRData.RaceTable.Races;
+      drawSelector(year, round);
     }
   }
   
@@ -320,6 +340,7 @@
     if(json != null || json.length == 0) {
       var response = parseJSON(json);
       schedules[response.MRData.RaceTable.season] = response.MRData.RaceTable.Races;
+      drawSelector(year, round);
     }
   }
   
@@ -430,36 +451,36 @@
       var races = schedules[year];
       if(races != null && round != null) {
         var races = schedules[year];
-        if(races == null) return;
-        var race = races[round - 1]
-        if(race == null) return; 
-        var selector = "<table id=\"selector\" class=\"selector\"><tr><td rowspan=\"2\" width=\"15\">";
-        if(round != 1 || year != firstYear) {
-          selector += "<img src=\"http://www.ergast.com/gadget/left.png\" style=\"cursor: pointer\" onClick=\"javascript:previous()\" title=\"Previous Round\" alt=\"Left\" />";
+        if(races != null) {
+          var race = races[round - 1]
+          if(race != null) { 
+            var selector = "<table id=\"selector\" class=\"selector\"><tr><td rowspan=\"2\" width=\"15\">";
+            if(round != 1 || year != firstYear) {
+              selector += "<img src=\"http://www.ergast.com/gadget/left.png\" style=\"cursor: pointer\" onClick=\"javascript:previous()\" title=\"Previous Round\" alt=\"Left\" />";
+            }
+            selector += "</td><td rowspan=\"2\" width=\"20\">";
+            if(year != firstYear) {
+              selector += "<img src=\"http://www.ergast.com/gadget/wideLeft.png\" style=\"cursor: pointer\" onClick=\"javascript:previousYear()\" title=\"Previous Season\" alt=\"Left\" />";
+            }
+            selector += "</td><td class=\"race\"><a href=\"" + race.url + "\" target=\"_blank\" title=\"Race Report\">" + race.season + " " +  race.raceName + "</a></td>";
+            selector += "<td rowspan=\"2\" width=\"20\">";
+            if(year != currentYear) {
+              selector += "<img src=\"http://www.ergast.com/gadget/wideRight.png\" onClick=\"javascript:nextYear()\" title=\"Next Season\" alt=\"Right\" />";
+            }
+            selector += "</td><td rowspan=\"2\" width=\"15\">";
+            if(round != lastRounds[year] || year != currentYear) {
+              selector += "<img src=\"http://www.ergast.com/gadget/right.png\" onClick=\"javascript:next()\" title=\"Next Race\" alt=\"Right\" />";
+            }
+            selector += "</td></tr>";
+            selector += "<tr></td><td class=\"round\">Round " + round + " of " + lastRounds[year] + "</td>";
+            selector += "</tr>";
+            selector += "</table>";
+            _gel("selector").innerHTML = selector;
+            return;
+          }
         }
-        selector += "</td><td rowspan=\"2\" width=\"20\">";
-        if(year != firstYear) {
-          selector += "<img src=\"http://www.ergast.com/gadget/wideLeft.png\" style=\"cursor: pointer\" onClick=\"javascript:previousYear()\" title=\"Previous Season\" alt=\"Left\" />";
-        }
-        selector += "</td><td class=\"race\"><a href=\"" + race.url + "\" target=\"_blank\" title=\"Race Report\">" + race.season + " " +  race.raceName + "</a></td>";
-        selector += "<td rowspan=\"2\" width=\"20\">";
-        if(year != currentYear) {
-          selector += "<img src=\"http://www.ergast.com/gadget/wideRight.png\" onClick=\"javascript:nextYear()\" title=\"Next Season\" alt=\"Right\" />";
-        }
-        selector += "</td><td rowspan=\"2\" width=\"15\">";
-        if(round != lastRounds[year] || year != currentYear) {
-          selector += "<img src=\"http://www.ergast.com/gadget/right.png\" onClick=\"javascript:next()\" title=\"Next Race\" alt=\"Right\" />";
-        }
-        selector += "</td></tr>";
-        selector += "<tr></td><td class=\"round\">Round " + round + " of " + lastRounds[year] + "</td>";
-        selector += "</tr>";
-        selector += "</table>";
-        _gel("selector").innerHTML = selector;
-        return;
       }
     }
-    var request = root + year + ".json";
-    _IG_FetchContent(request, parseSchedule); 
   }
 
   function updateFooter(max) {
