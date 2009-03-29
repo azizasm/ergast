@@ -242,7 +242,7 @@
     } else {
       var response = parseJSON(json);
       var standingsList = response.MRData.StandingsTable.StandingsLists[0];
-      if(year == standingsList.season && round == "last") round = standingsList.round;
+      if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearDS = allDS[standingsList.season];
       if(yearDS == null) yearDS = new Array();
@@ -272,7 +272,7 @@
     } else {
       var response = parseJSON(json);
       var standingsList = response.MRData.StandingsTable.StandingsLists[0];
-      if(year == standingsList.season && round == "last") round = standingsList.round;
+      if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearCS = allCS[standingsList.season];
       if(yearCS == null) yearCS = new Array();
@@ -302,7 +302,7 @@
     } else {
       var response = parseJSON(json);
       var race = response.MRData.RaceTable.Races[0];
-      if(year == race.season && round == "last") round = race.round;
+      if((year == race.season || year == "current") && round == "last") round = race.round;
       lastRounds[race.season] = race.round;
       var yearRR = allRR[race.season];
       if(yearRR == null) yearRR = new Array();
