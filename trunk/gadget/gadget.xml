@@ -505,7 +505,7 @@
   }
 
   function previous() {
-    if(round != "last") {
+    //if(round != "last") {
       if(round == 1) {
         if(year != firstYear) {
           year = year--;
@@ -516,7 +516,7 @@
       }
       offset = 0;
       redraw();
-    }
+    //}
   }
   
   function previousYear() {
