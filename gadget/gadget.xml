@@ -242,7 +242,8 @@
     } else {
       var response = parseJSON(json);
       var standingsList = response.MRData.StandingsTable.StandingsLists[0];
-      if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
+      //if((year == standingsList.season || year == "current") && round == "last") 
+      round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearDS = allDS[standingsList.season];
       if(yearDS == null) yearDS = new Array();
@@ -505,7 +506,7 @@
   }
 
   function previous() {
-    //if(round != "last") {
+    if(round != "last") {
       if(round == 1) {
         if(year != firstYear) {
           year = year--;
@@ -516,7 +517,7 @@
       }
       offset = 0;
       redraw();
-    //}
+    }
   }
   
   function previousYear() {
@@ -542,7 +543,7 @@
       offset = 0;
       redraw();
     }
-  }
+  } 
   
   function nextYear() {
     if(year != "current" && year != currentYear) {
