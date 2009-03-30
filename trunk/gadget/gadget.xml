@@ -502,7 +502,7 @@
 
   function drawNext() {
     if(nextRace != null) {
-      _gel("next").innerHTML = "<b>Next Race: </b>" + nextRace.raceName + " (" + formatDate(nextRace.date) + ")";
+      _gel("next").innerHTML = "<b>Next Race: </b>" + nextRace.raceName + " (" + formatDate(nextRace.date) + ").";
     }
   }
 
