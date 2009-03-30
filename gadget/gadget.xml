@@ -503,7 +503,7 @@
 
   function drawNext() {
     if(nextRace != null) {
-      _gel("next").innerHTML = "<b>Next Race: </b>" + nextRace.raceName + " (" + formatDate(nextRace.date) + ").";
+      _gel("next").innerHTML = "<b>Next Race: </b>" + nextRace.raceName + " (" + formatDate(nextRace.date) + ")";
     }
   }
 
@@ -511,8 +511,9 @@
     if(round != "last") {
       if(round == 1) {
         if(year != firstYear) {
-          year = year--;
-          round = "last";
+          year--;
+          round = lastRounds[year];      
+          if(round == null) round = "last"; 
         }
       } else {
         round--;
