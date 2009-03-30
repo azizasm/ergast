@@ -242,9 +242,8 @@
     } else {
       var response = parseJSON(json);
       var standingsList = response.MRData.StandingsTable.StandingsLists[0];
-      //if((year == standingsList.season || year == "current") && round == "last") 
-      round = standingsList.round;
-      lastRounds[standingsList.season] = standingsList.round;
+      if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
+      //lastRounds[standingsList.season] = standingsList.round;
       var yearDS = allDS[standingsList.season];
       if(yearDS == null) yearDS = new Array();
       yearDS[standingsList.round] = standingsList;
@@ -274,7 +273,7 @@
       var response = parseJSON(json);
       var standingsList = response.MRData.StandingsTable.StandingsLists[0];
       if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
-      lastRounds[standingsList.season] = standingsList.round;
+      //lastRounds[standingsList.season] = standingsList.round;
       var yearCS = allCS[standingsList.season];
       if(yearCS == null) yearCS = new Array();
       yearCS[standingsList.round] = standingsList;
@@ -304,7 +303,7 @@
       var response = parseJSON(json);
       var race = response.MRData.RaceTable.Races[0];
       if((year == race.season || year == "current") && round == "last") round = race.round;
-      lastRounds[race.season] = race.round;
+      //lastRounds[race.season] = race.round;
       var yearRR = allRR[race.season];
       if(yearRR == null) yearRR = new Array();
       yearRR[race.round] = race;
@@ -333,6 +332,7 @@
       year = response.MRData.RaceTable.season;
       currentYear = year;
       schedules[year] = response.MRData.RaceTable.Races;
+      lastRounds[year] = response.MRData.RaceTable.Races.length;
       drawSelector(year, round);
     }
   }
@@ -341,6 +341,7 @@
     if(json != null || json.length == 0) {
       var response = parseJSON(json);
       schedules[response.MRData.RaceTable.season] = response.MRData.RaceTable.Races;
+      lastRounds[response.MRData.RaceTable.season] = response.MRData.RaceTable.Races.length;
       drawSelector(year, round);
     }
   }
