@@ -335,6 +335,19 @@
       schedules[year] = response.MRData.RaceTable.Races;
       numRounds[year] = response.MRData.RaceTable.Races.length;
       drawSelector(year, round);
+      switch(selectedTab) {
+        case 0:
+          drawDriverStandings(year, round);
+          break;
+        case 1:
+          drawConstructorStandings(year, round);
+          break; 
+        case 2:
+          drawRaceResults(year, round);
+          break;
+        default:
+          drawDriverStandings(year, round);
+      }
     }
   }
   
