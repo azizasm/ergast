@@ -91,7 +91,7 @@
   var tabs;
   var selectedTab;
   var selectedTabId;
-  var firstYear = 2000;
+  var firstYear = 1990;
   var currentYear;
   var numRounds = new Array();
   var lastRounds = new Array();
