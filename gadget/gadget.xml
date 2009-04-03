@@ -472,20 +472,20 @@
           if(race != null) { 
             var selector = "<table id=\"selector\" class=\"selector\"><tr><td rowspan=\"2\" width=\"15\">";
             if(round != 1 || year != firstYear) {
-              selector += "<img src=\"http://www.ergast.com/gadget/left.png\" style=\"cursor: pointer\" onClick=\"javascript:previous()\" title=\"Previous Round\" alt=\"Left\" />";
+              selector += "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/left.png\" style=\"cursor: pointer\" onClick=\"javascript:previous()\" title=\"Previous Round\" alt=\"Left\" />";
             }
             selector += "</td><td rowspan=\"2\" width=\"20\">";
             if(year != firstYear) {
-              selector += "<img src=\"http://www.ergast.com/gadget/wideLeft.png\" style=\"cursor: pointer\" onClick=\"javascript:previousYear()\" title=\"Previous Season\" alt=\"Left\" />";
+              selector += "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/wideLeft.png\" style=\"cursor: pointer\" onClick=\"javascript:previousYear()\" title=\"Previous Season\" alt=\"Left\" />";
             }
             selector += "</td><td class=\"race\"><a href=\"" + race.url + "\" target=\"_blank\" title=\"Race Report\">" + race.season + " " +  race.raceName + "</a></td>";
             selector += "<td rowspan=\"2\" width=\"20\">";
             if(year != currentYear) {
-              selector += "<img src=\"http://www.ergast.com/gadget/wideRight.png\" onClick=\"javascript:nextYear()\" title=\"Next Season\" alt=\"Right\" />";
+              selector += "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/wideRight.png\" onClick=\"javascript:nextYear()\" title=\"Next Season\" alt=\"Right\" />";
             }
             selector += "</td><td rowspan=\"2\" width=\"15\">";
             if(round != lastRounds[year] || year != currentYear) {
-              selector += "<img src=\"http://www.ergast.com/gadget/right.png\" onClick=\"javascript:next()\" title=\"Next Race\" alt=\"Right\" />";
+              selector += "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/right.png\" onClick=\"javascript:next()\" title=\"Next Race\" alt=\"Right\" />";
             }
             selector += "</td></tr>";
             selector += "<tr></td><td class=\"round\">Round " + round + " of " + numRounds[year] + "</td>";
@@ -501,13 +501,13 @@
 
   function updateFooter(max) {
     if(offset + limit < max) {
-      _gel("down").innerHTML = "<img src=\"http://www.ergast.com/gadget/down.png\" style=\"cursor: pointer\" onClick=\"javascript:pageDown()\" title=\"Page Down\" alt=\"Down\" />";
+      _gel("down").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/down.png\" style=\"cursor: pointer\" onClick=\"javascript:pageDown()\" title=\"Page Down\" alt=\"Down\" />";
     } else {
       _gel("down").innerHTML = "";
     }
     drawNext();
     if(offset > 0) {
-      _gel("up").innerHTML = "<img src=\"http://www.ergast.com/gadget/up.png\" style=\"cursor: pointer\" onClick=\"javascript:pageUp()\" title=\"Page Up\" alt=\"Up\" />";
+      _gel("up").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/up.png\" style=\"cursor: pointer\" onClick=\"javascript:pageUp()\" title=\"Page Up\" alt=\"Up\" />";
     } else {
       _gel("up").innerHTML = "";
       _IG_AdjustIFrameHeight();
