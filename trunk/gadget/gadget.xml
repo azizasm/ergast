@@ -516,7 +516,7 @@
 
   function drawNext() {
     if(nextRace != null) {
-      _gel("next").innerHTML = "<b>Next Race: </b>" + <a href=\"" + nextRace.url + "\" target=\"_blank\" title=\"Race Preview\">" +  nextRace.raceName + "</a> + " (" + formatDate(nextRace.date) + ")";
+      _gel("next").innerHTML = "<b>Next Race: </b><a href=\"" + nextRace.url + "\" target=\"_blank\" title=\"Race Preview\">" +  nextRace.raceName + "</a> (" + formatDate(nextRace.date) + ")";
     }
   }
 
