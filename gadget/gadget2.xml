@@ -42,7 +42,7 @@
   .race { font-size: 14px; font-weight: bold }
   .round { font-size: 13px; }
   .season { font-size: 13px; }
-  .list { font-size: 12px; padding: 1px 1px 1px 1px;  border-width: 0 1px 1px 1px; border-style: solid; border-color: #676767; color:black }
+  .list { font-size: 12px; padding: 1px 1px 1px 1px;  border-width: 0 1px 1px 1px; border-style: solid; border-color: #676767 }
   .list td { padding: 0 5px 0 5px }
   .head { background-color: #d8d8d8 }
   .odd { background-color: #f4f4f4 }
@@ -389,7 +389,7 @@
           var constructors = standings[i].Constructors;
           var points = standings[i].points;
           var wins = standings[i].wins;
-          list += "<tr class=\"" + line + "\"><td class=\"centred\">" + position + "</td><td><a href=\"" + durl + "\" target=\"_blank\">" + driver + "</a></td><td>";
+          list += "<tr class=\"" + line + "\"><td class=\"centred\">" + position + "</td><td><a style=\"color: #800000\" href=\"" + durl + "\" target=\"_blank\">" + driver + "</a></td><td>";
           for(var j=0; j<constructors.length; j++) {
             var constructor = constructors[j].name;
             var curl = constructors[j].url;
