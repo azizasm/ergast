@@ -34,7 +34,7 @@
   <EnumValue value="99" display_value="All"/>
 </UserPref>
 
-<UserPref name="scheme" display_name="Color scheme" datatype="enum" default_value="Blue">
+<UserPref name="scheme" display_name="Color scheme" datatype="enum" default_value="#0000ff">
   <EnumValue value="#0000ff" displayValue="Blue"/>
   <EnumValue value="#000000" displayValue="Grey"/>
   <EnumValue value="#00ff00" displayValue="Green"/>
