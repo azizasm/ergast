@@ -401,7 +401,7 @@
           for(var j=0; j<constructors.length; j++) {
             var constructor = constructors[j].name;
             var curl = constructors[j].url;
-            list += "<a href=\"" + curl + "\" target=\"_blank\">" + constructor + "</a>";
+            list += "<a style=\"color: " + scheme + "\" href=\"" + curl + "\" target=\"_blank\">" + constructor + "</a>";
             if(j < constructors.length - 1) list += " / ";
           }
           list += "</td><td class=\"centred\">" + points + "</td><td class=\"centred\">" + wins + "</td></tr>";
@@ -431,7 +431,7 @@
           var nationality = standings[i].Constructor.nationality;;
           var points = standings[i].points;
           var wins = standings[i].wins;
-          list += "<tr class=\"" + line + "\"><td class=\"centred\">" + position + "</td><td><a href=\"" + curl + "\" target=\"_blank\">" + constructor + "</a></td><td>" + nationality + "</td><td class=\"centred\">" + points + "</td><td class=\"centred\">" + wins + "</td></tr>";
+          list += "<tr class=\"" + line + "\"><td class=\"centred\">" + position + "</td><td><a style=\"color: " + scheme + "\" href=\"" + curl + "\" target=\"_blank\">" + constructor + "</a></td><td>" + nationality + "</td><td class=\"centred\">" + points + "</td><td class=\"centred\">" + wins + "</td></tr>";
           if(line == "odd") { line = "even"; } else { line = "odd"; }
         }
         list += "</table>";
@@ -459,7 +459,7 @@
           var curl = results[i].Constructor.url;
           var grid = results[i].grid;
           var points = results[i].points;
-          list += "<tr class=\"" + line + "\"><td class=\"centred\">" + position + "</td><td><a href=\"" + durl + "\" target=\"_blank\">" + driver + "</a></td><td><a href=\"" + curl + "\" target=\"_blank\">" + constructor + "</a></td><td class=\"centred\">" + grid + "</td><td class=\"centred\">" + points + "</td></tr>";
+          list += "<tr class=\"" + line + "\"><td class=\"centred\">" + position + "</td><td><a style=\"color: " + scheme + "\" href=\"" + durl + "\" target=\"_blank\">" + driver + "</a></td><td><a style=\"color: " + scheme + "\" href=\"" + curl + "\" target=\"_blank\">" + constructor + "</a></td><td class=\"centred\">" + grid + "</td><td class=\"centred\">" + points + "</td></tr>";
           if(line == "odd") { line = "even"; } else { line = "odd"; }
         }
         list += "</table>";
