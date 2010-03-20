@@ -94,6 +94,7 @@
   var prefs = new _IG_Prefs();
   var offset = 0;
   var limit;
+  var scheme;
   var tabs;
   var selectedTab;
   var selectedTabId;
@@ -114,6 +115,7 @@
     year = "current";
     round = "last";
     limit = prefs.getInt("limit");
+    scheme = prefs.getInt("scheme");
     tabs = new _IG_Tabs(__MODULE_ID__, prefs.getString("initialTab"), _gel("tabs"));
     tabs.addDynamicTab("Driver Standings", driverStandings);
     tabs.addDynamicTab("Constructor Standings", constructorStandings);
