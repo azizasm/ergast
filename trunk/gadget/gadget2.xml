@@ -115,7 +115,7 @@
     year = "current";
     round = "last";
     limit = prefs.getInt("limit");
-    scheme = prefs.getInt("scheme");
+    scheme = prefs.getString("scheme");
     tabs = new _IG_Tabs(__MODULE_ID__, prefs.getString("initialTab"), _gel("tabs"));
     tabs.addDynamicTab("Driver Standings", driverStandings);
     tabs.addDynamicTab("Constructor Standings", constructorStandings);
