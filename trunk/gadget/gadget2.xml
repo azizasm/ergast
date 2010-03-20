@@ -34,6 +34,12 @@
   <EnumValue value="99" display_value="All"/>
 </UserPref>
 
+<UserPref name="colorScheme" display_name="Color scheme" datatype="enum" default_value="#0000ff">
+  <EnumValue value="#0000ff" displayValue="Blue"/>
+  <EnumValue value="#000000" displayValue="Grey"/>
+  <EnumValue value="#00ff00" displayValue="Green"/>
+</UserPref>
+
 <Content type="html">
 <![CDATA[
 <style type="text/css">
@@ -389,7 +395,7 @@
           var constructors = standings[i].Constructors;
           var points = standings[i].points;
           var wins = standings[i].wins;
-          list += "<tr class=\"" + line + "\"><td class=\"centred\">" + position + "</td><td><a style=\"color: #800000\" href=\"" + durl + "\" target=\"_blank\">" + driver + "</a></td><td>";
+          list += "<tr class=\"" + line + "\"><td class=\"centred\">" + position + "</td><td><a style=\"color: " + colorScheme + "\" href=\"" + durl + "\" target=\"_blank\">" + driver + "</a></td><td>";
           for(var j=0; j<constructors.length; j++) {
             var constructor = constructors[j].name;
             var curl = constructors[j].url;
