@@ -26,17 +26,6 @@
 
 <Content type="html">
 <![CDATA[
-<script type="text/javascript">
-function _IG_FetchContent(url, callback, opt_params) {
-  var params = opt_params || {};
-  params["CONTENT_TYPE"] = gadgets.io.ContentType.TEXT;
-  
-  gadgets.io.makeRequest(url, function(obj) {
-    callback(obj.data);
-  }, params);
-}
-</script>
-]]><![CDATA[
 <style type="text/css">
   .selector { font-size: 13px; text-align: center; margin-bottom: 2px; width: 100%}
   .footer { font-size: 12px; margin: 0; text-align: center; width: 100%}
@@ -625,6 +614,14 @@ function _IG_FetchContent(url, callback, opt_params) {
       default:
         return "";
     }
+  }
+  
+  function _IG_FetchContent(url, callback, opt_params) {
+    var params = opt_params || {};
+    params["CONTENT_TYPE"] = gadgets.io.ContentType.TEXT;
+    gadgets.io.makeRequest(url, function(obj) {
+      callback(obj.data);
+    }, params);
   }
 </script>
 
