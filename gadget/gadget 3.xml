@@ -1,41 +1,42 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
+<?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-<ModulePrefs 
-  title="F1 Standings &amp; Results" 
-  title_url="http://ergast.com/mrd/gallery#gadget" 
-  height="250"
-  description="Latest Formula One standings and results. Click on the horizontal arrows for previous F1 races and seasons. Click on the vertical arrows to page through results."
-  author="Ergast"
-  author_affiliation="ergast.com"
-  author_email="ergast.com+nospam@googlemail.com"
-  screenshot="http://ergast.googlecode.com/svn/trunk/gadget/280x260.png"
-  thumbnail="http://ergast.googlecode.com/svn/trunk/gadget/120x60.png"
->
-  <Require feature="tabs"/>
+<ModulePrefs author="Ergast" author_affiliation="ergast.com" author_email="ergast.com+nospam@googlemail.com" description="Latest Formula One standings and results. Click on the horizontal arrows for previous F1 races and seasons. Click on the vertical arrows to page through results." height="250" screenshot="http://ergast.googlecode.com/svn/trunk/gadget/280x260.png" thumbnail="http://ergast.googlecode.com/svn/trunk/gadget/120x60.png" title="F1 Standings &amp; Results" title_url="http://ergast.com/mrd/gallery#gadget">
+  <Require feature="tabs" />
   <Require feature="dynamic-height" />
 </ModulePrefs>
 
-<UserPref name="initialTab" display_name="Initial tab" datatype="enum" default_value="Driver Standings">
-  <EnumValue value="Driver Standings"/>
-  <EnumValue value="Constructor Standings"/>
-  <EnumValue value="Race Results"/>
+<UserPref datatype="enum" default_value="Driver Standings" display_name="Initial tab" name="initialTab">
+  <EnumValue value="Driver Standings" />
+  <EnumValue value="Constructor Standings" />
+  <EnumValue value="Race Results" />
 </UserPref>
 
-<UserPref name="limit" display_name="Results per page" datatype="enum" default_value="8">
-  <EnumValue value="3"/>
-  <EnumValue value="4"/>
-  <EnumValue value="5"/>
-  <EnumValue value="6"/>
-  <EnumValue value="8"/>
-  <EnumValue value="10"/>
-  <EnumValue value="12"/>
-  <EnumValue value="15"/>
-  <EnumValue value="20"/>
-  <EnumValue value="99" display_value="All"/>
+<UserPref datatype="enum" default_value="8" display_name="Results per page" name="limit">
+  <EnumValue value="3" />
+  <EnumValue value="4" />
+  <EnumValue value="5" />
+  <EnumValue value="6" />
+  <EnumValue value="8" />
+  <EnumValue value="10" />
+  <EnumValue value="12" />
+  <EnumValue value="15" />
+  <EnumValue value="20" />
+  <EnumValue display_value="All" value="99" />
 </UserPref>
 
 <Content type="html">
 <![CDATA[
+<script type="text/javascript">
+function _IG_FetchContent(url, callback, opt_params) {
+  var params = opt_params || {};
+  params["CONTENT_TYPE"] = gadgets.io.ContentType.TEXT;
+  
+  gadgets.io.makeRequest(url, function(obj) {
+    callback(obj.data);
+  }, params);
+}
+</script>
+]]><![CDATA[
 <style type="text/css">
   .selector { font-size: 13px; text-align: center; margin-bottom: 2px; width: 100%}
   .footer { font-size: 12px; margin: 0; text-align: center; width: 100%}
@@ -85,7 +86,7 @@
 
 <script type="text/javascript">
   var root = "http://ergast.com/api/f1/";
-  var prefs = new _IG_Prefs();
+  var prefs = new gadgets.Prefs();
   var offset = 0;
   var limit;
   var tabs;
@@ -102,13 +103,13 @@
   var allRR = new Array();
   var year;
   var round;
-  _IG_RegisterOnloadHandler(init);
+  gadgets.util.registerOnLoadHandler(init);
 
   function init() {
     year = "current";
     round = "last";
     limit = prefs.getInt("limit");
-    tabs = new _IG_Tabs(__MODULE_ID__, prefs.getString("initialTab"), _gel("tabs"));
+    tabs = new gadgets.TabSet(__MODULE_ID__, prefs.getString("initialTab"), document.getElementById("tabs"));
     tabs.addDynamicTab("Driver Standings", driverStandings);
     tabs.addDynamicTab("Constructor Standings", constructorStandings);
     tabs.addDynamicTab("Race Results", raceResults);
@@ -239,7 +240,7 @@
   
   function parseLastDriverStandings(json) {
     if(json == null || json.length == 0) {
-      _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
       var standingsList = response.MRData.StandingsTable.StandingsLists[0];
@@ -255,7 +256,7 @@
   
   function parseDriverStandings(json) {
     if(json == null || json.length == 0) {
-      _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
       var standingsList = response.MRData.StandingsTable.StandingsLists[0];
@@ -269,7 +270,7 @@
   
   function parseLastConstructorStandings(json) {
     if(json == null || json.length == 0) {
-      _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
       var standingsList = response.MRData.StandingsTable.StandingsLists[0];
@@ -285,7 +286,7 @@
   
   function parseConstructorStandings(json) {
     if(json == null || json.length == 0) {
-      _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
       var standingsList = response.MRData.StandingsTable.StandingsLists[0];
@@ -299,7 +300,7 @@
   
   function parseLastRaceResults(json) {
     if(json == null || json.length == 0) {
-      _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
       var race = response.MRData.RaceTable.Races[0];
@@ -315,7 +316,7 @@
   
   function parseRaceResults(json) {
     if(json == null || json.length == 0) {
-     _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+     document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
       var race = response.MRData.RaceTable.Races[0];
@@ -400,7 +401,7 @@
           if(line == "odd") { line = "even"; } else { line = "odd"; }
         }
         list += "</table>";
-        _gel(selectedTabId).innerHTML = list;
+        document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(standings.length); 
       }    
     }  
@@ -427,7 +428,7 @@
           if(line == "odd") { line = "even"; } else { line = "odd"; }
         }
         list += "</table>";
-        _gel(selectedTabId).innerHTML = list;
+        document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(standings.length); 
       }    
     }  
@@ -455,7 +456,7 @@
           if(line == "odd") { line = "even"; } else { line = "odd"; }
         }
         list += "</table>";
-        _gel(selectedTabId).innerHTML = list;
+        document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(results.length);
       }
     }
@@ -491,7 +492,7 @@
             selector += "<tr></td><td class=\"round\">Round " + round + " of " + numRounds[year] + "</td>";
             selector += "</tr>";
             selector += "</table>";
-            _gel("selector").innerHTML = selector;
+            document.getElementById("selector").innerHTML = selector;
             return;
           }
         }
@@ -501,22 +502,22 @@
 
   function updateFooter(max) {
     if(offset + limit < max) {
-      _gel("down").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/down.png\" style=\"cursor: pointer\" onClick=\"javascript:pageDown()\" title=\"Page Down\" alt=\"Down\" />";
+      document.getElementById("down").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/down.png\" style=\"cursor: pointer\" onClick=\"javascript:pageDown()\" title=\"Page Down\" alt=\"Down\" />";
     } else {
-      _gel("down").innerHTML = "";
+      document.getElementById("down").innerHTML = "";
     }
     drawNext();
     if(offset > 0) {
-      _gel("up").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/up.png\" style=\"cursor: pointer\" onClick=\"javascript:pageUp()\" title=\"Page Up\" alt=\"Up\" />";
+      document.getElementById("up").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/up.png\" style=\"cursor: pointer\" onClick=\"javascript:pageUp()\" title=\"Page Up\" alt=\"Up\" />";
     } else {
-      _gel("up").innerHTML = "";
-      _IG_AdjustIFrameHeight();
+      document.getElementById("up").innerHTML = "";
+      gadgets.window.adjustHeight();
     }
   }
 
   function drawNext() {
     if(nextRace != null) {
-      _gel("next").innerHTML = "<b>Next Race: </b><a href=\"" + nextRace.url + "\" target=\"_blank\" title=\"Race Preview\">" +  nextRace.raceName + "</a> (" + formatDate(nextRace.date) + ")";
+      document.getElementById("next").innerHTML = "<b>Next Race: </b><a href=\"" + nextRace.url + "\" target=\"_blank\" title=\"Race Preview\">" +  nextRace.raceName + "</a> (" + formatDate(nextRace.date) + ")";
     }
   }
 
@@ -582,10 +583,10 @@
   }
 
   function showLoading() {
-    _gel(selectedTabId).innerHTML = "<i>Loading...</i>";
-    _gel("down").innerHTML = "";
-    _gel("up").innerHTML = "";
-    _gel("next").innerHTML = "";
+    document.getElementById(selectedTabId).innerHTML = "<i>Loading...</i>";
+    document.getElementById("down").innerHTML = "";
+    document.getElementById("up").innerHTML = "";
+    document.getElementById("next").innerHTML = "";
   }
 
   function formatDate(date) {
@@ -638,6 +639,5 @@
     </tr>
   </table>
 </div>
-]]>
-</Content> 
+]]></Content> 
 </Module>
