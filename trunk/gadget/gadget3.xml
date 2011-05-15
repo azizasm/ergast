@@ -92,6 +92,8 @@
   var allRR = new Array();
   var year;
   var round;
+  var params = {};
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
   gadgets.util.registerOnLoadHandler(init);
 
   function init() {
@@ -156,10 +158,11 @@
     }
     showLoading();
     var request = root + year + "/" + round + "/driverStandings.json";
+    
     if(round == "last") {
-      _IG_FetchContent(request, parseLastDriverStandings);
+      gadgets.io.makeRequest(request parseLastDriverStandings, params);
     } else {
-      _IG_FetchContent(request, parseDriverStandings);
+      gadgets.io.makeRequest(request parseDriverStandings, params);
     }
   }
   
@@ -177,9 +180,9 @@
     showLoading();
     var request = root + year + "/" + round + "/constructorStandings.json";
     if(round == "last") {
-      _IG_FetchContent(request, parseLastConstructorStandings);
+      gadgets.io.makeRequest(request parseLastConstructorStandings, params);
     } else {
-      _IG_FetchContent(request, parseConstructorStandings);
+      gadgets.io.makeRequest(request parseConstructorStandings, params);
     }
   }
   
@@ -197,16 +200,16 @@
     showLoading();
     var request = root + year + "/" + round + "/results.json";
     if(round == "last") {
-      _IG_FetchContent(request, parseLastRaceResults);
+      gadgets.io.makeRequest(request parseLastRaceResults, params);
     } else {
-      _IG_FetchContent(request, parseRaceResults);
+      gadgets.io.makeRequest(request parseRaceResults, params);
     }
   }
   
   function getSelector() {
     if(year == "current") {
       var scheduleRequest = root + "current.json";
-      _IG_FetchContent(scheduleRequest, parseCurrentSchedule);    
+      gadgets.io.makeRequest(request parseCurrentSchedule, params);
     } else {
       if(round == "last" && lastRounds[year] != null) round = lastRounds[year];
       var races = schedules[year];
@@ -218,13 +221,13 @@
         }
       }
       var request = root + year + ".json";
-      _IG_FetchContent(request, parseSchedule);
+      gadgets.io.makeRequest(request parseSchedule, params);
     }
   }
   
   function getNext() {
     var nextRequest = root + "current/next.json";
-    _IG_FetchContent(nextRequest, parseNext);
+    gadgets.io.makeRequest(request parseNext, params);
   }
   
   function parseLastDriverStandings(json) {
@@ -615,13 +618,6 @@
         return "";
     }
   }
-  
-  function _IG_FetchContent(url, callback, opt_params) {
-    var params = {};
-    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-    gadgets.io.makeRequest(url, function(obj) { callback(obj.data); }, params);
-  }
-  // function(obj) { callback(obj.data); }
 </script>
 
 <div id="selector"></div>
