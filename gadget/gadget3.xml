@@ -230,7 +230,7 @@
   }
   
   function parseLastDriverStandings(json) {
-    if(json == null) {
+    if(json.data == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
@@ -245,7 +245,7 @@
   }
   
   function parseDriverStandings(json) {
-    if(json == null) {
+    if(json.data == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
@@ -258,7 +258,7 @@
   }
   
   function parseLastConstructorStandings(json) {
-    if(json == null) {
+    if(json.data == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
@@ -273,7 +273,7 @@
   }
   
   function parseConstructorStandings(json) {
-    if(json == null) {
+    if(json.data == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
@@ -286,7 +286,7 @@
   }
   
   function parseLastRaceResults(json) {
-    if(json == null) {
+    if(json.data == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var race = json.data.MRData.RaceTable.Races[0];
@@ -301,7 +301,7 @@
   }
   
   function parseRaceResults(json) {
-    if(json == null) {
+    if(json.data == null) {
      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var race = json.data.MRData.RaceTable.Races[0];
@@ -314,7 +314,7 @@
   }
 
   function parseCurrentSchedule(json) {
-    if(json != null) {
+    if(json.data != null) {
       year = json.data.MRData.RaceTable.season;
       currentYear = year;
       schedules[year] = json.data.MRData.RaceTable.Races;
@@ -337,7 +337,7 @@
   }
   
   function parseSchedule(json) {
-    if(json != null) {
+    if(json.data != null) {
       schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
       numRounds[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races.length;
       drawSelector(year, round);
@@ -345,7 +345,7 @@
   }
   
   function parseNext(json) {
-    if(json != null) {
+    if(json.data != null) {
       nextRace = json.data.MRData.RaceTable.Races[0];
       drawNext();
     }
