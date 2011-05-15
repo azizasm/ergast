@@ -360,10 +360,14 @@
     }
   }
   
-  function parseJSON(text) {
-    return gadgets.json.parse(text);
+//  function parseJSON(text) {
+//    return gadgets.json.parse(text);
+//  }
+
+  function parseJSON(obj) {
+    return obj.data;
   }
-  
+
   function drawDriverStandings(year, round) {
     var yearDS = allDS[year];
     if(yearDS != null) {
