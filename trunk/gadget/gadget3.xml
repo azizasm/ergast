@@ -207,7 +207,7 @@
   
   function getSelector() {
     if(year == "current") {
-      var scheduleRequest = root + "current.json";
+      var request = root + "current.json";
       gadgets.io.makeRequest(request, parseCurrentSchedule, params);
     } else {
       if(round == "last" && lastRounds[year] != null) round = lastRounds[year];
@@ -225,7 +225,7 @@
   }
   
   function getNext() {
-    var nextRequest = root + "current/next.json";
+    var request = root + "current/next.json";
     gadgets.io.makeRequest(request, parseNext, params);
   }
   
