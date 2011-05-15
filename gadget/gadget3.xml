@@ -230,11 +230,10 @@
   }
   
   function parseLastDriverStandings(json) {
-    if(json == null && json.length != 0) {
+    if(json == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var standingsList = response.MRData.StandingsTable.StandingsLists[0];
+      var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
       if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearDS = allDS[standingsList.season];
@@ -246,11 +245,10 @@
   }
   
   function parseDriverStandings(json) {
-    if(json == null && json.length != 0) {
+    if(json == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var standingsList = response.MRData.StandingsTable.StandingsLists[0];
+      var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
       var yearDS = allDS[standingsList.season];
       if(yearDS == null) yearDS = new Array();
       yearDS[standingsList.round] = standingsList;
@@ -260,11 +258,10 @@
   }
   
   function parseLastConstructorStandings(json) {
-    if(json == null && json.length != 0) {
+    if(json == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var standingsList = response.MRData.StandingsTable.StandingsLists[0];
+      var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
       if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearCS = allCS[standingsList.season];
@@ -276,11 +273,10 @@
   }
   
   function parseConstructorStandings(json) {
-    if(json == null && json.length != 0) {
+    if(json == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var standingsList = response.MRData.StandingsTable.StandingsLists[0];
+      var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
       var yearCS = allCS[standingsList.season];
       if(yearCS == null) yearCS = new Array();
       yearCS[standingsList.round] = standingsList;
@@ -290,11 +286,10 @@
   }
   
   function parseLastRaceResults(json) {
-    if(json == null && json.length != 0) {
+    if(json == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var race = response.MRData.RaceTable.Races[0];
+      var race = json.data.MRData.RaceTable.Races[0];
       if((year == race.season || year == "current") && round == "last") round = race.round;
       lastRounds[race.season] = race.round;
       var yearRR = allRR[race.season];
@@ -306,11 +301,10 @@
   }
   
   function parseRaceResults(json) {
-    if(json == null && json.length != 0) {
+    if(json == null) {
      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var race = response.MRData.RaceTable.Races[0];
+      var race = json.data.MRData.RaceTable.Races[0];
       var yearRR = allRR[race.season];
       if(yearRR == null) yearRR = new Array();
       yearRR[race.round] = race;
@@ -320,12 +314,11 @@
   }
 
   function parseCurrentSchedule(json) {
-    if(json != null && json.length != 0) {
-      var response = parseJSON(json);
-      year = response.MRData.RaceTable.season;
+    if(json != null) {
+      year = json.data.MRData.RaceTable.season;
       currentYear = year;
-      schedules[year] = response.MRData.RaceTable.Races;
-      numRounds[year] = response.MRData.RaceTable.Races.length;
+      schedules[year] = json.data.MRData.RaceTable.Races;
+      numRounds[year] = json.data.MRData.RaceTable.Races.length;
       drawSelector(year, round);
       switch(selectedTab) {
         case 0:
@@ -344,28 +337,18 @@
   }
   
   function parseSchedule(json) {
-    if(json != null && json.length != 0) {
-      var response = parseJSON(json);
-      schedules[response.MRData.RaceTable.season] = response.MRData.RaceTable.Races;
-      numRounds[response.MRData.RaceTable.season] = response.MRData.RaceTable.Races.length;
+    if(json != null) {
+      schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
+      numRounds[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races.length;
       drawSelector(year, round);
     }
   }
   
   function parseNext(json) {
-    if(json != null && json.length != 0) {
-      var response = parseJSON(json);
-      nextRace = response.MRData.RaceTable.Races[0];
+    if(json != null) {
+      nextRace = json.data.MRData.RaceTable.Races[0];
       drawNext();
     }
-  }
-  
-//  function parseJSON(text) {
-//    return gadgets.json.parse(text);
-//  }
-
-  function parseJSON(obj) {
-    return obj.data;
   }
 
   function drawDriverStandings(year, round) {
