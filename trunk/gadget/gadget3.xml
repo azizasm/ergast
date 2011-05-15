@@ -239,7 +239,7 @@ function _IG_FetchContent(url, callback, opt_params) {
   }
   
   function parseLastDriverStandings(json) {
-    if(json == null || json.length == 0) {
+    if(json == null && json.length != 0) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
@@ -255,7 +255,7 @@ function _IG_FetchContent(url, callback, opt_params) {
   }
   
   function parseDriverStandings(json) {
-    if(json == null || json.length == 0) {
+    if(json == null && json.length != 0) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
@@ -269,7 +269,7 @@ function _IG_FetchContent(url, callback, opt_params) {
   }
   
   function parseLastConstructorStandings(json) {
-    if(json == null || json.length == 0) {
+    if(json == null && json.length != 0) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
@@ -285,7 +285,7 @@ function _IG_FetchContent(url, callback, opt_params) {
   }
   
   function parseConstructorStandings(json) {
-    if(json == null || json.length == 0) {
+    if(json == null && json.length != 0) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
@@ -299,7 +299,7 @@ function _IG_FetchContent(url, callback, opt_params) {
   }
   
   function parseLastRaceResults(json) {
-    if(json == null || json.length == 0) {
+    if(json == null && json.length != 0) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
@@ -315,7 +315,7 @@ function _IG_FetchContent(url, callback, opt_params) {
   }
   
   function parseRaceResults(json) {
-    if(json == null || json.length == 0) {
+    if(json == null && json.length != 0) {
      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var response = parseJSON(json);
@@ -329,7 +329,7 @@ function _IG_FetchContent(url, callback, opt_params) {
   }
 
   function parseCurrentSchedule(json) {
-    if(json != null || json.length == 0) {
+    if(json != null && json.length != 0) {
       var response = parseJSON(json);
       year = response.MRData.RaceTable.season;
       currentYear = year;
@@ -353,7 +353,7 @@ function _IG_FetchContent(url, callback, opt_params) {
   }
   
   function parseSchedule(json) {
-    if(json != null || json.length == 0) {
+    if(json != null && json.length != 0) {
       var response = parseJSON(json);
       schedules[response.MRData.RaceTable.season] = response.MRData.RaceTable.Races;
       numRounds[response.MRData.RaceTable.season] = response.MRData.RaceTable.Races.length;
@@ -362,7 +362,7 @@ function _IG_FetchContent(url, callback, opt_params) {
   }
   
   function parseNext(json) {
-    if(json != null || json.length == 0) {
+    if(json != null && json.length != 0) {
       var response = parseJSON(json);
       nextRace = response.MRData.RaceTable.Races[0];
       drawNext();
