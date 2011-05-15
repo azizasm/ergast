@@ -158,11 +158,10 @@
     }
     showLoading();
     var request = root + year + "/" + round + "/driverStandings.json";
-    
     if(round == "last") {
-      gadgets.io.makeRequest(request parseLastDriverStandings, params);
+      gadgets.io.makeRequest(request, parseLastDriverStandings, params);
     } else {
-      gadgets.io.makeRequest(request parseDriverStandings, params);
+      gadgets.io.makeRequest(request, parseDriverStandings, params);
     }
   }
   
@@ -180,9 +179,9 @@
     showLoading();
     var request = root + year + "/" + round + "/constructorStandings.json";
     if(round == "last") {
-      gadgets.io.makeRequest(request parseLastConstructorStandings, params);
+      gadgets.io.makeRequest(request, parseLastConstructorStandings, params);
     } else {
-      gadgets.io.makeRequest(request parseConstructorStandings, params);
+      gadgets.io.makeRequest(request, parseConstructorStandings, params);
     }
   }
   
@@ -200,16 +199,16 @@
     showLoading();
     var request = root + year + "/" + round + "/results.json";
     if(round == "last") {
-      gadgets.io.makeRequest(request parseLastRaceResults, params);
+      gadgets.io.makeRequest(request, parseLastRaceResults, params);
     } else {
-      gadgets.io.makeRequest(request parseRaceResults, params);
+      gadgets.io.makeRequest(request, parseRaceResults, params);
     }
   }
   
   function getSelector() {
     if(year == "current") {
       var scheduleRequest = root + "current.json";
-      gadgets.io.makeRequest(request parseCurrentSchedule, params);
+      gadgets.io.makeRequest(request, parseCurrentSchedule, params);
     } else {
       if(round == "last" && lastRounds[year] != null) round = lastRounds[year];
       var races = schedules[year];
@@ -221,13 +220,13 @@
         }
       }
       var request = root + year + ".json";
-      gadgets.io.makeRequest(request parseSchedule, params);
+      gadgets.io.makeRequest(request, parseSchedule, params);
     }
   }
   
   function getNext() {
     var nextRequest = root + "current/next.json";
-    gadgets.io.makeRequest(request parseNext, params);
+    gadgets.io.makeRequest(request, parseNext, params);
   }
   
   function parseLastDriverStandings(json) {
