@@ -617,12 +617,11 @@
   }
   
   function _IG_FetchContent(url, callback, opt_params) {
-    var params = opt_params || {};
-    params["CONTENT_TYPE"] = gadgets.io.ContentType.TEXT;
-    gadgets.io.makeRequest(url, function(obj) {
-      callback(obj.data);
-    }, params);
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    gadgets.io.makeRequest(url, callback, params);
   }
+  // function(obj) { callback(obj.data); }
 </script>
 
 <div id="selector"></div>
