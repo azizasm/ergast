@@ -100,10 +100,10 @@
     year = "current";
     round = "last";
     limit = prefs.getInt("limit");
-    tabs = new gadgets.TabSet(__MODULE_ID__, prefs.getString("initialTab"), document.getElementById("tabs"));
-    tabs.addDynamicTab("Driver Standings", driverStandings);
-    tabs.addDynamicTab("Constructor Standings", constructorStandings);
-    tabs.addDynamicTab("Race Results", raceResults);
+    tabs = new gadgets.TabSet(getModuleId(), prefs.getString("initialTab"), document.getElementById("tabs"));
+    tabs.addTab("Driver Standings", { callback: driverStandings });
+    tabs.addTab("Constructor Standings", { callback: constructorStandings });
+    tabs.addTab("Race Results", { callback: raceResults });
     getNext();
   }
  
