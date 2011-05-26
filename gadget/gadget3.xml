@@ -561,10 +561,10 @@
   }
 
   function showLoading() {
-    var p = document.createElement("p");
-    p.innerHTML = "<i>Loading...</i>";
-    document.getElementById(selectedTabId).appendChild(p);
-    //document.getElementById(selectedTabId).innerHTML = "<i>Loading...</i>";
+    //var p = document.createElement("p");
+    //p.innerHTML = "<i>Loading...</i>";
+    //document.getElementById(selectedTabId).appendChild(p);
+    document.getElementById(selectedTabId).innerHTML = "<i>Loading...</i>";
     document.getElementById("down").innerHTML = "";
     document.getElementById("up").innerHTML = "";
     document.getElementById("next").innerHTML = "";
