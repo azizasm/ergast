@@ -81,7 +81,7 @@
   var tabs;
   var selectedTab;
   var selectedTabId;
-  var firstYear = 1980;
+  var firstYear = 1950;
   var currentYear;
   var numRounds = new Array();
   var lastRounds = new Array();
@@ -101,9 +101,9 @@
     round = "last";
     limit = prefs.getInt("limit");
     tabs = new gadgets.TabSet(__MODULE_ID__, prefs.getString("initialTab"), document.getElementById("tabs"));
-    tabs.addTab("Driver Standings", { callback: driverStandings });
-    tabs.addTab("Constructor Standings", { callback: constructorStandings });
-    tabs.addTab("Race Results", { callback: raceResults });
+    tabs.addTab("Driver Standings", "ds", { callback: driverStandings });
+    tabs.addTab("Constructor Standings", "cs", { callback: constructorStandings });
+    tabs.addTab("Race Results", "rr", { callback: raceResults });
     getNext();
   }
  
@@ -561,9 +561,6 @@
   }
 
   function showLoading() {
-    //var p = document.createElement("p");
-    //p.innerHTML = "<i>Loading...</i>";
-    //document.getElementById(selectedTabId).appendChild(p);
     document.getElementById(selectedTabId).innerHTML = "<i>Loading...</i>";
     document.getElementById("down").innerHTML = "";
     document.getElementById("up").innerHTML = "";
