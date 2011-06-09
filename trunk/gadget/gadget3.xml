@@ -101,7 +101,8 @@
     round = "last";
     limit = prefs.getInt("limit");
     tabs = new gadgets.TabSet(__MODULE_ID__, prefs.getString("initialTab"), document.getElementById("tabs"));
-    tabs.addTab("Driver Standings", "dsTabId", { callback: driverStandings });
+#    tabs.addTab("Driver Standings", "dsTabId", { callback: driverStandings });
+    tabs.addTab("Driver Standings", "dsTabId", { callback: drawDS });
     tabs.addTab("Constructor Standings", "csTabId", { callback: constructorStandings });
     tabs.addTab("Race Results", "rrTabId", { callback: raceResults });
     getNext();
@@ -298,6 +299,14 @@
       allRR[race.season] = yearRR;
       drawRaceResults(year, round);
     }
+  }
+  
+  function drawDS(tabId) {
+    var p = document.createElement("p");
+    // Get selected tab
+    var selectedTab = tabs.getSelectedTab();
+    p.innerHTML = "This is dynamic content generated in callback for tab " + selectedTab.getName();
+    document.getElementById(tabId).appendChild(p);
   }
   
   function parseRaceResults(json) {
