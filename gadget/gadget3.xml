@@ -104,16 +104,22 @@
 //    tabs.addTab("Driver Standings", "dsTabId", { callback: driverStandings });
     
   tabs.addTab("Driver Standings", {
-    contentContainer: document.getElementById("three_id"),
-    callback: drawDS
+    contentContainer: document.getElementById("dsTabId"),
+    callback: driverStandings
   });
     
-    tabs.addTab("Constructor Standings", "csTabId", { callback: constructorStandings });
+//    tabs.addTab("Constructor Standings", "csTabId", { callback: constructorStandings });
+    
+    tabs.addTab("Constructor Standings", "{
+    contentContainer: document.getElementById("csTabId"),
+    callback: drawCS
+  });
+    
     tabs.addTab("Race Results", "rrTabId", { callback: raceResults });
     getNext();
   }
  
-  function drawDS(tabId) {
+  function drawCS(tabId) {
     var p = document.createElement("p");
     // Get selected tab
     var selectedTab = tabs.getSelectedTab();
