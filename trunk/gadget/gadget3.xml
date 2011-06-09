@@ -105,7 +105,7 @@
     
   tabs.addTab("Driver Standings", {
     contentContainer: document.getElementById("three_id"),
-    callback: drawCS
+    callback: drawDS
   });
     
     tabs.addTab("Constructor Standings", "csTabId", { callback: constructorStandings });
