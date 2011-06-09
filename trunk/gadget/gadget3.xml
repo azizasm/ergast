@@ -101,9 +101,9 @@
     round = "last";
     limit = prefs.getInt("limit");
     tabs = new gadgets.TabSet(__MODULE_ID__, prefs.getString("initialTab"), document.getElementById("tabs"));
-    tabs.addTab("Driver Standings", "ds", { callback: driverStandings });
-    tabs.addTab("Constructor Standings", "cs", { callback: constructorStandings });
-    tabs.addTab("Race Results", "rr", { callback: raceResults });
+    tabs.addTab("Driver Standings", "dsTabId", { callback: driverStandings });
+    tabs.addTab("Constructor Standings", "csTabId", { callback: constructorStandings });
+    tabs.addTab("Race Results", "rrTabId", { callback: raceResults });
     getNext();
   }
  
@@ -608,6 +608,9 @@
 
 <div id="selector"></div>
 <div id="tabs"></div>
+<div id="dsTabId" style="display:none">Content for DS tab.</div>
+<div id="csTabId" style="display:none">Content for CS tab.</div>
+<div id="rrTabId" style="display:none">Content for RR tab.</div>
 <div id="footer">
   <table class="footer">
     <tr>
