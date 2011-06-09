@@ -110,7 +110,7 @@
     
 //    tabs.addTab("Constructor Standings", "csTabId", { callback: constructorStandings });
     
-    tabs.addTab("Constructor Standings", "{
+    tabs.addTab("Constructor Standings", {
     contentContainer: document.getElementById("csTabId"),
     callback: drawCS
   });
