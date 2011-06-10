@@ -219,6 +219,7 @@
     if(year == "current") {
 	     document.getElementById("selector").innerHTML = "2.";
       var request = root + "current.json";
+	              var request = root + "2011/6/driverStandings.json";
       gadgets.io.makeRequest(request, parseCurrentSchedule, params);
     } else {
 	     document.getElementById("selector").innerHTML = "3.";
@@ -231,7 +232,7 @@
       }
 	 document.getElementById("selector").innerHTML = "4.";
       //var request = root + year + ".json";
-          var request = root + year + "/" + round + "/driverStandings.json";
+          var request = root + "2011/6/driverStandings.json";
       gadgets.io.makeRequest(request, parseSchedule, params);
     }
   }
