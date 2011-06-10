@@ -219,7 +219,6 @@
     if(year == "current") {
 	     document.getElementById("selector").innerHTML = "2.";
       var request = root + "current.json";
-	              var request = root + "2011/6/driverStandings.json";
       gadgets.io.makeRequest(request, parseCurrentSchedule, params);
     } else {
 	     document.getElementById("selector").innerHTML = "3.";
@@ -231,8 +230,7 @@
 	return;
       }
 	 document.getElementById("selector").innerHTML = "4.";
-      //var request = root + year + ".json";
-          var request = root + "2011/6/driverStandings.json";
+      var request = root + year + ".json";
       gadgets.io.makeRequest(request, parseSchedule, params);
     }
   }
@@ -341,7 +339,7 @@
   function parseCurrentSchedule(json) {
     document.getElementById("selector").innerHTML = "5a.";
     if(json.data != null) {
-	        document.getElementById("selector").innerHTML = "6a.";
+        document.getElementById("selector").innerHTML = "6a.";
       year = json.data.MRData.RaceTable.season;
       currentYear = year;
       schedules[year] = json.data.MRData.RaceTable.Races;
