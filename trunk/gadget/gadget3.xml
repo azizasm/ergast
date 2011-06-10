@@ -230,7 +230,8 @@
 	return;
       }
 	 document.getElementById("selector").innerHTML = "4.";
-      var request = root + year + ".json";
+      //var request = root + year + ".json";
+          var request = root + year + "/" + round + "/driverStandings.json";
       gadgets.io.makeRequest(request, parseSchedule, params);
     }
   }
@@ -337,13 +338,13 @@
   }
 
   function parseCurrentSchedule(json) {
-	   document.getElementById("selector").innerHTML = "5a." + json.data.MRData.RaceTable.season;
-    //if(json.data != null) {
+    document.getElementById("selector").innerHTML = "5a.";
+    if(json.data != null) {
       year = json.data.MRData.RaceTable.season;
       currentYear = year;
       schedules[year] = json.data.MRData.RaceTable.Races;
       numRounds[year] = json.data.MRData.RaceTable.Races.length;
-	 document.getElementById("selector").innerHTML = "parseCurrentSchedule: " + json.data.MRData.RaceTable.season;
+        document.getElementById("selector").innerHTML = "parseCurrentSchedule: " + json.data.MRData.RaceTable.season;
       // !!!!! drawSelector(year, round);
       switch(selectedTab) {
         case 0:
@@ -358,21 +359,21 @@
         default:
           drawDriverStandings(year, round);
       }
-    //}    else {
-    //    document.getElementById("selector").innerHTML = "6a.";
-    //}
+    }    else {
+        document.getElementById("selector").innerHTML = "6a.";
+    }
   }
   
   function parseSchedule(json) {
 	   document.getElementById("selector").innerHTML = "5b." + json.data.MRData.RaceTable.season;
-    //if(json.data != null) {
+    if(json.data != null) {
 	document.getElementById("selector").innerHTML = "parseSchedule: " + json.data.MRData.RaceTable.season;
       schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
       numRounds[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races.length;
       drawSelector(year, round);
-    //}     else {
-    //    document.getElementById("selector").innerHTML = "6b.";    
-    //}
+    }     else {
+        document.getElementById("selector").innerHTML = "6b.";    
+    }
   }
   
   function parseNext(json) {
