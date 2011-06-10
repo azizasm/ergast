@@ -215,6 +215,7 @@
   }
   
   function getSelector() {
+	  document.getElementById("selector").innerHTML = "1.";
     if(year == "current") {
       var request = root + "current.json";
       gadgets.io.makeRequest(request, parseCurrentSchedule, params);
@@ -465,6 +466,7 @@
   }
 
   function drawSelector(year, round) {
+    document.getElementById("selector").innerHTML = "Draw selector year: " + year + " round: " + round;
     if(year != "current") {
       if(round == "last") round = lastRounds[year];
       var races = schedules[year];
