@@ -264,7 +264,7 @@
       if(yearDS == null) yearDS = new Array();
       yearDS[standingsList.round] = standingsList;
       allDS[standingsList.season] = yearDS;
-      //drawDriverStandings(year, round);
+      drawDriverStandings(year, round);
     }
   }
   
@@ -378,7 +378,8 @@
 
   function drawDriverStandings(year, round) {
 	  document.getElementById(selectedTabId).innerHTML = "4.";
-    var yearDS = allDS[year];
+    //var yearDS = allDS[year];
+    var yearDS = allDS["2011"];
     if(yearDS != null) {
 	    document.getElementById(selectedTabId).innerHTML = "5.";
       standingsList = yearDS[round];
