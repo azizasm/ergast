@@ -258,13 +258,12 @@
     } else {
       var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
       if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
-	    document.getElementById(selectedTabId).innerHTML = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearDS = allDS[standingsList.season];
       if(yearDS == null) yearDS = new Array();
       yearDS[standingsList.round] = standingsList;
       allDS[standingsList.season] = yearDS;
-      //drawDriverStandings(year, round);
+      drawDriverStandings(year, round);
     }
   }
   
@@ -410,7 +409,9 @@
         document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(standings.length); 
       }    
-    }  
+    }    else {
+           document.getElementById(selectedTabId).innerHTML = "yearDS is null. " + year;
+    }	    
   }
  
   function drawConstructorStandings(year, round) {
