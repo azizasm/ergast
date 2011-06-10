@@ -131,7 +131,7 @@
     selectedTab = 0;
     selectedTabId = tabId;
     offset = 0;
-	  document.getElementById(tabId).innerHTML = "1.");
+	  document.getElementById(tabId).innerHTML = "1.";
     redraw();
   }
 
@@ -167,7 +167,7 @@
   }
 
   function getDriverStandings(year, round) {
-	  document.getElementById(tabId).innerHTML = "2.");
+	  document.getElementById(tabId).innerHTML = "2.";
     if(year != "current" && round != "last") {
       var yearDS = allDS[year];
       if(yearDS != null) {
@@ -252,7 +252,7 @@
   }
   
   function parseLastDriverStandings(json) {
-	  document.getElementById(tabId).innerHTML = "3a.");
+	  document.getElementById(tabId).innerHTML = "3a.";
     if(json.data == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
@@ -268,7 +268,7 @@
   }
   
   function parseDriverStandings(json) {
-	  document.getElementById(tabId).innerHTML = "3b.");
+	  document.getElementById(tabId).innerHTML = "3b.";
     if(json.data == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
