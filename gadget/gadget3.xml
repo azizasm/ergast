@@ -259,11 +259,12 @@
       var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
       if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
+	    document.getElementById(selectedTabId).innerHTML = "Last round = " + standingsList.round;
       var yearDS = allDS[standingsList.season];
       if(yearDS == null) yearDS = new Array();
       yearDS[standingsList.round] = standingsList;
       allDS[standingsList.season] = yearDS;
-      drawDriverStandings(year, round);
+      //drawDriverStandings(year, round);
     }
   }
   
