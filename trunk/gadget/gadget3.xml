@@ -215,13 +215,10 @@
   }
   
   function getSelector() {
-	  document.getElementById("selector").innerHTML = "1.";
     if(year == "current") {
-	     document.getElementById("selector").innerHTML = "2.";
       var request = root + "current.json";
       gadgets.io.makeRequest(request, parseCurrentSchedule, params);
     } else {
-	     document.getElementById("selector").innerHTML = "3.";
       if(round == "last" && lastRounds[year] != null) round = lastRounds[year];
       var races = schedules[year];
       if(races != null && round != null) {
@@ -229,7 +226,6 @@
         drawSelector(year, round);
 	return;
       }
-	 document.getElementById("selector").innerHTML = "4.";
       var request = root + year + ".json";
       gadgets.io.makeRequest(request, parseSchedule, params);
     }
@@ -337,9 +333,7 @@
   }
 
   function parseCurrentSchedule(json) {
-    document.getElementById("selector").innerHTML = "5a.";
     if(json.data != null) {
-        document.getElementById("selector").innerHTML = "6a.";
       year = json.data.MRData.RaceTable.season;
       currentYear = year;
       schedules[year] = json.data.MRData.RaceTable.Races;
@@ -358,20 +352,14 @@
         default:
           drawDriverStandings(year, round);
       }
-    }    else {
-        document.getElementById("selector").innerHTML = "7a.";
     }
   }
   
   function parseSchedule(json) {
-	   document.getElementById("selector").innerHTML = "5b." + json.data.MRData.RaceTable.season;
     if(json.data != null) {
-	        document.getElementById("selector").innerHTML = "6b.";
       schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
       numRounds[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races.length;
       drawSelector(year, round);
-    }     else {
-        document.getElementById("selector").innerHTML = "7b.";    
     }
   }
   
@@ -379,7 +367,7 @@
     if(json.data != null) {
       nextRace = json.data.MRData.RaceTable.Races[0];
       drawNext();
-	gadgets.window.adjustHeight();
+      gadgets.window.adjustHeight();
     }
   }
 
@@ -414,8 +402,7 @@
         list += "</table>";
         document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(standings.length); 
-      }    
-      gadgets.window.adjustHeight();
+      }
     }
   }
  
@@ -443,7 +430,6 @@
         document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(standings.length); 
       }
-      gadgets.window.adjustHeight();      
     }  
   }
 
@@ -472,7 +458,6 @@
         document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(results.length);
       }
-      gadgets.window.adjustHeight();
     }
   }
 
