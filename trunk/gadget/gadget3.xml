@@ -223,7 +223,7 @@
       var races = schedules[year];
       if(races != null && round != null) {
         var races = schedules[year];
-     // !!!!!!!      drawSelector(year, round);
+        // !!!!!!!      drawSelector(year, round);
           return;
         }
       }
@@ -257,7 +257,6 @@
   }
   
   function parseDriverStandings(json) {
-	  document.getElementById(selectedTabId).innerHTML = "3b.";
     if(json.data == null) {
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
