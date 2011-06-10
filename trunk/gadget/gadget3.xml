@@ -215,7 +215,6 @@
   }
   
   function getSelector() {
-	  document.getElementById("selector").innerHTML = "1.";
     if(year == "current") {
       var request = root + "current.json";
       gadgets.io.makeRequest(request, parseCurrentSchedule, params);
@@ -499,7 +498,11 @@
             document.getElementById("selector").innerHTML = selector;
             return;
           }
+        }   else {
+           document.getElementById("selector").innerHTML = "races is null!";	      
         }
+      }    else {
+        document.getElementById("selector").innerHTML = "races or round is null!";	      
       }
     }
   }
