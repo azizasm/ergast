@@ -243,10 +243,9 @@
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
-      if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
       if(year == "current") year = standingsList.season;
+      if(year == standingsList.season && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
-	    document.getElementById(selectedTabId).innerHTML = "standingsList.season = " + standingsList.season;
       var yearDS = allDS[standingsList.season];
       if(yearDS == null) yearDS = new Array();
       yearDS[standingsList.round] = standingsList;
@@ -274,7 +273,8 @@
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
-      if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
+      if(year == "current") year = standingsList.season;
+      if(year == standingsList.season && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearCS = allCS[standingsList.season];
       if(yearCS == null) yearCS = new Array();
@@ -302,7 +302,8 @@
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var race = json.data.MRData.RaceTable.Races[0];
-      if((year == race.season || year == "current") && round == "last") round = race.round;
+      if(year == "current") year = standingsList.season;
+      if(year == standingsList.season && round == "last") round = standingsList.round;
       lastRounds[race.season] = race.round;
       var yearRR = allRR[race.season];
       if(yearRR == null) yearRR = new Array();
@@ -364,13 +365,10 @@
   }
 
   function drawDriverStandings(year, round) {
-	  document.getElementById(selectedTabId).innerHTML = "4.";
     var yearDS = allDS[year];
     if(yearDS != null) {
-	    document.getElementById(selectedTabId).innerHTML = "5.";
       standingsList = yearDS[round];
       if(standingsList != null) {
-	      document.getElementById(selectedTabId).innerHTML = "6.";
         drawSelector(year, round);
         var standings = standingsList.DriverStandings;
         var list = "<table class=\"list\" width=\"100%\"><tr class=\"head\"><th>Pos</th><th>Driver</th><th>Constructor</th><th>Pts</th><th>Wins</th></tr>";
