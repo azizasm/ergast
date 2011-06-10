@@ -414,9 +414,7 @@
         document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(standings.length); 
       }    
-    }    else {
-           document.getElementById(selectedTabId).innerHTML = "yearDS is null. " + year;
-    }	    
+    }
   }
  
   function drawConstructorStandings(year, round) {
@@ -528,8 +526,8 @@
       document.getElementById("up").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/up.png\" style=\"cursor: pointer\" onClick=\"javascript:pageUp()\" title=\"Page Up\" alt=\"Up\" />";
     } else {
       document.getElementById("up").innerHTML = "";
-      gadgets.window.adjustHeight();
     }
+    gadgets.window.adjustHeight() 
   }
 
   function drawNext() {
