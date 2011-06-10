@@ -223,8 +223,7 @@
       var races = schedules[year];
       if(races != null && round != null) {
         var races = schedules[year];
-        if(races != null) {
-          drawSelector(year, round);
+     // !!!!!!!      drawSelector(year, round);
           return;
         }
       }
@@ -341,7 +340,8 @@
       currentYear = year;
       schedules[year] = json.data.MRData.RaceTable.Races;
       numRounds[year] = json.data.MRData.RaceTable.Races.length;
-      drawSelector(year, round);
+	 document.getElementById("selector").innerHTML = "parseCurrentSchedule: " + json.data.MRData.RaceTable.season;
+      // !!!!! drawSelector(year, round);
       switch(selectedTab) {
         case 0:
           drawDriverStandings(year, round);
@@ -363,7 +363,7 @@
 	 document.getElementById("selector").innerHTML = "parseSchedule: " + json.data.MRData.RaceTable.season;
       schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
       numRounds[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races.length;
-      //drawSelector(year, round);
+      // !!!!! drawSelector(year, round);
     }
   }
   
