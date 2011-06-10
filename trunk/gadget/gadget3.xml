@@ -341,6 +341,7 @@
   function parseCurrentSchedule(json) {
     document.getElementById("selector").innerHTML = "5a.";
     if(json.data != null) {
+	        document.getElementById("selector").innerHTML = "6a.";
       year = json.data.MRData.RaceTable.season;
       currentYear = year;
       schedules[year] = json.data.MRData.RaceTable.Races;
@@ -361,19 +362,20 @@
           drawDriverStandings(year, round);
       }
     }    else {
-        document.getElementById("selector").innerHTML = "6a.";
+        document.getElementById("selector").innerHTML = "7a.";
     }
   }
   
   function parseSchedule(json) {
 	   document.getElementById("selector").innerHTML = "5b." + json.data.MRData.RaceTable.season;
     if(json.data != null) {
+	        document.getElementById("selector").innerHTML = "6b.";
 	document.getElementById("selector").innerHTML = "parseSchedule: " + json.data.MRData.RaceTable.season;
       schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
       numRounds[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races.length;
       drawSelector(year, round);
     }     else {
-        document.getElementById("selector").innerHTML = "6b.";    
+        document.getElementById("selector").innerHTML = "7b.";    
     }
   }
   
