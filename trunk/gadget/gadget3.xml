@@ -226,12 +226,13 @@
       var races = schedules[year];
       if(races != null && round != null) {
         var races = schedules[year];
-        // !!!!!!!      drawSelector(year, round);
+        drawSelector(year, round);
 	return;
       }
            document.getElementById("selector").innerHTML = "4.";
       var request = root + year + ".json";
-      gadgets.io.makeRequest(request, parseSchedule, params);
+      document.getElementById("selector").innerHTML = request;
+      //  !!!!!   gadgets.io.makeRequest(request, parseSchedule, params);
     }
   }
   
