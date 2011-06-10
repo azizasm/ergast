@@ -224,8 +224,7 @@
       if(races != null && round != null) {
         var races = schedules[year];
         // !!!!!!!      drawSelector(year, round);
-          return;
-        }
+	return;
       }
       var request = root + year + ".json";
       gadgets.io.makeRequest(request, parseSchedule, params);
