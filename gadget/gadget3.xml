@@ -377,8 +377,8 @@
     if(yearDS != null) {
       standingsList = yearDS[round];
       if(standingsList != null) {
-        drawSelector(year, round);
-	  // ??     getSelector()
+        // ?? drawSelector(year, round);
+	  getSelector();
         var standings = standingsList.DriverStandings;
         var list = "<table class=\"list\" width=\"100%\"><tr class=\"head\"><th>Pos</th><th>Driver</th><th>Constructor</th><th>Pts</th><th>Wins</th></tr>";
         var line = "odd";
