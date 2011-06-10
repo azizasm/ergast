@@ -215,10 +215,13 @@
   }
   
   function getSelector() {
+	  document.getElementById("selector").innerHTML = "1.";
     if(year == "current") {
+	     document.getElementById("selector").innerHTML = "2.";
       var request = root + "current.json";
       gadgets.io.makeRequest(request, parseCurrentSchedule, params);
     } else {
+	     document.getElementById("selector").innerHTML = "3.";
       if(round == "last" && lastRounds[year] != null) round = lastRounds[year];
       var races = schedules[year];
       if(races != null && round != null) {
@@ -226,6 +229,7 @@
         // !!!!!!!      drawSelector(year, round);
 	return;
       }
+           document.getElementById("selector").innerHTML = "4.";
       var request = root + year + ".json";
       gadgets.io.makeRequest(request, parseSchedule, params);
     }
