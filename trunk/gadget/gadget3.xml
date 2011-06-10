@@ -377,7 +377,7 @@
     if(yearDS != null) {
       standingsList = yearDS[round];
       if(standingsList != null) {
-        drawSelector(year, round);
+        // !!!!! drawSelector(year, round);
         var standings = standingsList.DriverStandings;
         var list = "<table class=\"list\" width=\"100%\"><tr class=\"head\"><th>Pos</th><th>Driver</th><th>Constructor</th><th>Pts</th><th>Wins</th></tr>";
         var line = "odd";
@@ -413,7 +413,7 @@
     if(yearCS != null) {
       standingsList = yearCS[round];
       if(standingsList != null) {
-        drawSelector(year, round);
+        // !!!!! drawSelector(year, round);
         var standings = standingsList.ConstructorStandings;
         var list = "<table class=\"list\" width=\"100%\"><tr class=\"head\"><th>Pos</th><th>Constructor</th><th>Nationality</th><th>Pts</th><th>Wins</th></tr>";
         var line = "odd";
@@ -440,7 +440,7 @@
     if(yearRR != null) {
       race = yearRR[round];
       if(race != null) {
-        drawSelector(year, round);
+        // !!!!! drawSelector(year, round);
         var results = race.Results;
         var list = "<table class=\"list\" width=\"100%\"><tr class=\"head\"><th>Pos</th><th>Driver</th><th>Constructor</th><th>Grid</th><th>Pts</th></tr>";
         var line = "odd";
