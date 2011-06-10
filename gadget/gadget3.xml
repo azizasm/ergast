@@ -511,7 +511,6 @@
       }    else {
         document.getElementById("selector").innerHTML = "races or round is null!";	      
       }
-          gadgets.window.adjustHeight()    /// Best location?
     }
   }
 
@@ -650,9 +649,9 @@
 <div id="footer">
   <table class="footer">
     <tr>
-      <td id="down" width="37"></td>
+      <td id="down" height="10" width="37"></td>
       <td id="next" style="text-align: center"></td>
-      <td id="up" width="37"></td>
+      <td id="up"  height="10" width="37"></td>
     </tr>
   </table>
 </div>
