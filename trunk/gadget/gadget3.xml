@@ -168,9 +168,9 @@
     showLoading();
     var request = root + year + "/" + round + "/driverStandings.json";
     if(round == "last") {
-   //   gadgets.io.makeRequest(request, parseLastDriverStandings, params);
+      gadgets.io.makeRequest(request, parseLastDriverStandings, params);
     } else {
-   //   gadgets.io.makeRequest(request, parseDriverStandings, params);
+      gadgets.io.makeRequest(request, parseDriverStandings, params);
     }
   }
   
@@ -344,8 +344,7 @@
       currentYear = year;
       schedules[year] = json.data.MRData.RaceTable.Races;
       numRounds[year] = json.data.MRData.RaceTable.Races.length;
-        document.getElementById("selector").innerHTML = "parseCurrentSchedule: " + json.data.MRData.RaceTable.season;
-      // !!!!! drawSelector(year, round);
+      drawSelector(year, round);
       switch(selectedTab) {
         case 0:
           drawDriverStandings(year, round);
@@ -368,7 +367,6 @@
 	   document.getElementById("selector").innerHTML = "5b." + json.data.MRData.RaceTable.season;
     if(json.data != null) {
 	        document.getElementById("selector").innerHTML = "6b.";
-	document.getElementById("selector").innerHTML = "parseSchedule: " + json.data.MRData.RaceTable.season;
       schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
       numRounds[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races.length;
       drawSelector(year, round);
@@ -426,7 +424,7 @@
     if(yearCS != null) {
       standingsList = yearCS[round];
       if(standingsList != null) {
-        // !!!!! drawSelector(year, round);
+        drawSelector(year, round);
         var standings = standingsList.ConstructorStandings;
         var list = "<table class=\"list\" width=\"100%\"><tr class=\"head\"><th>Pos</th><th>Constructor</th><th>Nationality</th><th>Pts</th><th>Wins</th></tr>";
         var line = "odd";
@@ -453,7 +451,7 @@
     if(yearRR != null) {
       race = yearRR[round];
       if(race != null) {
-        // !!!!! drawSelector(year, round);
+        drawSelector(year, round);
         var results = race.Results;
         var list = "<table class=\"list\" width=\"100%\"><tr class=\"head\"><th>Pos</th><th>Driver</th><th>Constructor</th><th>Grid</th><th>Pts</th></tr>";
         var line = "odd";
@@ -609,7 +607,6 @@
   }
 
   function formatDate(date) {
-    //var nextYear = date.slice(0, 4);
     var nextMonth = date.slice(5, 7);
     var nextDay = date.slice(8, 10);
     return nextDay + "&nbsp;" + getMonth(nextMonth);
