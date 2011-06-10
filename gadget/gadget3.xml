@@ -473,7 +473,6 @@
   }
 
   function drawSelector(year, round) {
-    document.getElementById("selector").innerHTML = "Draw selector year: " + year + " round: " + round;
     if(year != "current") {
       if(round == "last") round = lastRounds[year];
       var races = schedules[year];
@@ -512,6 +511,7 @@
       }    else {
         document.getElementById("selector").innerHTML = "races or round is null!";	      
       }
+          gadgets.window.adjustHeight()    /// Best location?
     }
   }
 
