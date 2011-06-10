@@ -168,9 +168,9 @@
     showLoading();
     var request = root + year + "/" + round + "/driverStandings.json";
     if(round == "last") {
-      gadgets.io.makeRequest(request, parseLastDriverStandings, params);
+   //   gadgets.io.makeRequest(request, parseLastDriverStandings, params);
     } else {
-      gadgets.io.makeRequest(request, parseDriverStandings, params);
+   //   gadgets.io.makeRequest(request, parseDriverStandings, params);
     }
   }
   
