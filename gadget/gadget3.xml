@@ -243,7 +243,10 @@
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
-      if(year == "current") year = standingsList.season;
+      if(year == "current") {
+        currentYear = standingsList.season;
+	year = standingsList.season;
+      }
       if(year == standingsList.season && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearDS = allDS[standingsList.season];
@@ -273,7 +276,10 @@
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
-      if(year == "current") year = standingsList.season;
+      if(year == "current") {
+        currentYear = standingsList.season;
+	year = standingsList.season;
+      }
       if(year == standingsList.season && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearCS = allCS[standingsList.season];
@@ -302,7 +308,10 @@
       document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
       var race = json.data.MRData.RaceTable.Races[0];
-      if(year == "current") year = standingsList.season;
+      if(year == "current") {
+        currentYear = standingsList.season;
+	year = standingsList.season;
+      }
       if(year == standingsList.season && round == "last") round = standingsList.round;
       lastRounds[race.season] = race.round;
       var yearRR = allRR[race.season];
