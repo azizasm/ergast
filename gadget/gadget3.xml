@@ -379,6 +379,7 @@
     if(json.data != null) {
       nextRace = json.data.MRData.RaceTable.Races[0];
       drawNext();
+	gadgets.window.adjustHeight();
     }
   }
 
@@ -414,6 +415,7 @@
         document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(standings.length); 
       }    
+      gadgets.window.adjustHeight();
     }
   }
  
@@ -440,7 +442,8 @@
         list += "</table>";
         document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(standings.length); 
-      }    
+      }
+      gadgets.window.adjustHeight();      
     }  
   }
 
@@ -469,6 +472,7 @@
         document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(results.length);
       }
+      gadgets.window.adjustHeight();
     }
   }
 
@@ -511,6 +515,7 @@
       }    else {
         document.getElementById("selector").innerHTML = "races or round is null!";	      
       }
+      gadgets.window.adjustHeight();
     }
   }
 
