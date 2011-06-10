@@ -358,6 +358,8 @@
         default:
           drawDriverStandings(year, round);
       }
+    }    else {
+	    document.getElementById("selector").innerHTML = "6a.";
     }
   }
   
