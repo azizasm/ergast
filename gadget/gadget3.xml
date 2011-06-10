@@ -376,6 +376,7 @@
   }
 
   function drawDriverStandings(year, round) {
+	  document.getElementById(selectedTabId).innerHTML = "4.";
     var yearDS = allDS[year];
     if(yearDS != null) {
       standingsList = yearDS[round];
