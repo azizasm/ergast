@@ -360,9 +360,10 @@
   
   function parseSchedule(json) {
     if(json.data != null) {
+	 document.getElementById("selector").innerHTML = "parseSchedule: " + json.data.MRData.RaceTable.season;
       schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
       numRounds[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races.length;
-      drawSelector(year, round);
+      //drawSelector(year, round);
     }
   }
   
