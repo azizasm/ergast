@@ -526,7 +526,7 @@
     } else {
       document.getElementById("up").innerHTML = "";
     }
-    gadgets.window.adjustHeight() 
+    gadgets.window.adjustHeight();
   }
 
   function drawNext() {
