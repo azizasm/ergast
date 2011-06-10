@@ -368,6 +368,8 @@
       schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
       numRounds[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races.length;
       drawSelector(year, round);
+    }     else {
+	document.getElementById("selector").innerHTML = "6b.";    
     }
   }
   
