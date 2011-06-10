@@ -124,7 +124,7 @@
     // Get selected tab
     var selectedTab = tabs.getSelectedTab();
     p.innerHTML = "This is dynamic content generated in callback for tab " + selectedTab.getName();
-    document.getElementById(tabId).appendChild(p);
+    document.getElementById(tabId).innerHTML = "This is content generated in callback for tab " + selectedTab.getName();
   }
   
   function driverStandings(tabId) {
