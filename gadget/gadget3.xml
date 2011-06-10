@@ -337,7 +337,7 @@
   }
 
   function parseCurrentSchedule(json) {
-	   document.getElementById("selector").innerHTML = "5a.";
+	   document.getElementById("selector").innerHTML = "5a." + json.data.MRData.RaceTable.season;
     //if(json.data != null) {
       year = json.data.MRData.RaceTable.season;
       currentYear = year;
@@ -364,7 +364,7 @@
   }
   
   function parseSchedule(json) {
-	   document.getElementById("selector").innerHTML = "5b.";
+	   document.getElementById("selector").innerHTML = "5b." + json.data.MRData.RaceTable.season;
     //if(json.data != null) {
 	document.getElementById("selector").innerHTML = "parseSchedule: " + json.data.MRData.RaceTable.season;
       schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
