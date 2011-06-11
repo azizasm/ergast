@@ -35,7 +35,7 @@
   .list { font-size: 12px; padding: 1px 1px 1px 1px;  border-width: 0 1px 1px 1px; border-style: solid; border-color: #676767 }
   .list td { padding: 0 5px 0 5px }
   .head { background-color: #d8d8d8 }
-  .odd { background-color: #f8f8f8 }
+  .odd { background-color: #fafafa }
   .even { background-color: #e8e8ec }
   .centred { text-align: center }
   a:link { text-decoration: none; cursor:pointer }
