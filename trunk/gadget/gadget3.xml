@@ -36,7 +36,7 @@
   .list td { padding: 0 5px 0 5px }
   .head { background-color: #d8d8d8 }
   .odd { background-color: #f4f4f4 }
-  .even { background-color: #d3d3db }
+  .even { background-color: #d8d8dc }
   .centred { text-align: center }
   a:link { text-decoration: none; cursor:pointer }
   a:visited { text-decoration: none }
