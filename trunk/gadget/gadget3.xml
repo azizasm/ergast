@@ -629,9 +629,6 @@
 
 <div id="selector"></div>
 <div id="tabs"></div>
-<div id="dsTabId" style="display:none">Content for DS tab.</div>
-<div id="csTabId" style="display:none">Content for CS tab.</div>
-<div id="rrTabId" style="display:none">Content for RR tab.</div>
 <div id="footer">
   <table class="footer">
     <tr>
