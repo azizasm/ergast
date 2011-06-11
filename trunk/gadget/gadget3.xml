@@ -102,15 +102,15 @@
     limit = prefs.getInt("limit");
     tabs = new gadgets.TabSet(__MODULE_ID__, prefs.getString("initialTab"), document.getElementById("tabs"));
     tabs.addTab("Driver Standings", {
-      contentContainer: document.getElementById("dsTabId"),
+      contentContainer: document.getElementById("ds"),
       callback: driverStandings
     });
     tabs.addTab("Constructor Standings", {
-      contentContainer: document.getElementById("csTabId"),
+      contentContainer: document.getElementById("cs"),
       callback: constructorStandings
     });
     tabs.addTab("Race Results", {
-      contentContainer: document.getElementById("rrTabId"),
+      contentContainer: document.getElementById("rr"),
       callback: raceResults
     });
     getNext();
