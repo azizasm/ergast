@@ -494,11 +494,7 @@
             document.getElementById("selector").innerHTML = selector;
             return;
           }
-        }   else {
-           document.getElementById("selector").innerHTML = "races is null!";	      
         }
-      }    else {
-        document.getElementById("selector").innerHTML = "races or round is null!";	      
       }
       gadgets.window.adjustHeight();
     }
