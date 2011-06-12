@@ -306,10 +306,10 @@
     } else {
       var race = json.data.MRData.RaceTable.Races[0];
       if(year == "current") {
-        currentYear = standingsList.season;
-	year = standingsList.season;
+        currentYear = race.season;
+	year = race.season;
       }
-      if(year == standingsList.season && round == "last") round = standingsList.round;
+      if(year == race.season && round == "last") round = race.round;
       lastRounds[race.season] = race.round;
       var yearRR = allRR[race.season];
       if(yearRR == null) yearRR = new Array();
