@@ -1,37 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
+<?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-<ModulePrefs 
-  title="F1 Standings &amp; Results" 
-  title_url="http://ergast.com/mrd/gallery#gadget" 
-  height="250"
-  description="Latest Formula One standings and results. Click on the horizontal arrows for previous F1 races and seasons. Click on the vertical arrows to page through results."
-  author="Ergast"
-  author_affiliation="ergast.com"
-  author_email="ergast.com+nospam@googlemail.com"
-  screenshot="http://ergast.googlecode.com/svn/trunk/gadget/280x260.png"
-  thumbnail="http://ergast.googlecode.com/svn/trunk/gadget/120x60.png"
->
-  <Require feature="tabs"/>
+<ModulePrefs author="Ergast" author_affiliation="ergast.com" author_email="ergast.com+nospam@googlemail.com" description="Latest Formula One standings and results. Click on the horizontal arrows for previous F1 races and seasons. Click on the vertical arrows to page through results." height="250" screenshot="http://ergast.googlecode.com/svn/trunk/gadget/280x260.png" thumbnail="http://ergast.googlecode.com/svn/trunk/gadget/120x60.png" title="F1 Standings &amp; Results" title_url="http://ergast.com/mrd/gallery#gadget">
+  <Require feature="tabs" />
   <Require feature="dynamic-height" />
 </ModulePrefs>
 
-<UserPref name="initialTab" display_name="Initial tab" datatype="enum" default_value="Driver Standings">
-  <EnumValue value="Driver Standings"/>
-  <EnumValue value="Constructor Standings"/>
-  <EnumValue value="Race Results"/>
+<UserPref datatype="enum" default_value="Driver Standings" display_name="Initial tab" name="initialTab">
+  <EnumValue value="Driver Standings" />
+  <EnumValue value="Constructor Standings" />
+  <EnumValue value="Race Results" />
 </UserPref>
 
-<UserPref name="limit" display_name="Results per page" datatype="enum" default_value="8">
-  <EnumValue value="3"/>
-  <EnumValue value="4"/>
-  <EnumValue value="5"/>
-  <EnumValue value="6"/>
-  <EnumValue value="8"/>
-  <EnumValue value="10"/>
-  <EnumValue value="12"/>
-  <EnumValue value="15"/>
-  <EnumValue value="20"/>
-  <EnumValue value="99" display_value="All"/>
+<UserPref datatype="enum" default_value="8" display_name="Results per page" name="limit">
+  <EnumValue value="3" />
+  <EnumValue value="4" />
+  <EnumValue value="5" />
+  <EnumValue value="6" />
+  <EnumValue value="8" />
+  <EnumValue value="10" />
+  <EnumValue value="12" />
+  <EnumValue value="15" />
+  <EnumValue value="20" />
+  <EnumValue display_value="All" value="99" />
 </UserPref>
 
 <Content type="html">
@@ -45,8 +35,8 @@
   .list { font-size: 12px; padding: 1px 1px 1px 1px;  border-width: 0 1px 1px 1px; border-style: solid; border-color: #676767 }
   .list td { padding: 0 5px 0 5px }
   .head { background-color: #d8d8d8 }
-  .odd { background-color: #f4f4f4 }
-  .even { background-color: #d3d3e8 }
+  .odd { background-color: #fafafa }
+  .even { background-color: #e8e8ec }
   .centred { text-align: center }
   a:link { text-decoration: none; cursor:pointer }
   a:visited { text-decoration: none }
@@ -85,13 +75,13 @@
 
 <script type="text/javascript">
   var root = "http://ergast.com/api/f1/";
-  var prefs = new _IG_Prefs();
+  var prefs = new gadgets.Prefs();
   var offset = 0;
   var limit;
   var tabs;
   var selectedTab;
   var selectedTabId;
-  var firstYear = 1980;
+  var firstYear = 1950;
   var currentYear;
   var numRounds = new Array();
   var lastRounds = new Array();
@@ -102,19 +92,30 @@
   var allRR = new Array();
   var year;
   var round;
-  _IG_RegisterOnloadHandler(init);
+  var params = {};
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+  gadgets.util.registerOnLoadHandler(init);
 
   function init() {
     year = "current";
     round = "last";
     limit = prefs.getInt("limit");
-    tabs = new _IG_Tabs(__MODULE_ID__, prefs.getString("initialTab"), _gel("tabs"));
-    tabs.addDynamicTab("Driver Standings", driverStandings);
-    tabs.addDynamicTab("Constructor Standings", constructorStandings);
-    tabs.addDynamicTab("Race Results", raceResults);
+    tabs = new gadgets.TabSet(__MODULE_ID__, prefs.getString("initialTab"), document.getElementById("tabs"));
+    tabs.addTab("Driver Standings", {
+      contentContainer: document.getElementById("ds"),
+      callback: driverStandings
+    });
+    tabs.addTab("Constructor Standings", {
+      contentContainer: document.getElementById("cs"),
+      callback: constructorStandings
+    });
+    tabs.addTab("Race Results", {
+      contentContainer: document.getElementById("rr"),
+      callback: raceResults
+    });
     getNext();
   }
- 
+  
   function driverStandings(tabId) {
     selectedTab = 0;
     selectedTabId = tabId;
@@ -167,9 +168,9 @@
     showLoading();
     var request = root + year + "/" + round + "/driverStandings.json";
     if(round == "last") {
-      _IG_FetchContent(request, parseLastDriverStandings);
+      gadgets.io.makeRequest(request, parseLastDriverStandings, params);
     } else {
-      _IG_FetchContent(request, parseDriverStandings);
+      gadgets.io.makeRequest(request, parseDriverStandings, params);
     }
   }
   
@@ -187,9 +188,9 @@
     showLoading();
     var request = root + year + "/" + round + "/constructorStandings.json";
     if(round == "last") {
-      _IG_FetchContent(request, parseLastConstructorStandings);
+      gadgets.io.makeRequest(request, parseLastConstructorStandings, params);
     } else {
-      _IG_FetchContent(request, parseConstructorStandings);
+      gadgets.io.makeRequest(request, parseConstructorStandings, params);
     }
   }
   
@@ -207,43 +208,44 @@
     showLoading();
     var request = root + year + "/" + round + "/results.json";
     if(round == "last") {
-      _IG_FetchContent(request, parseLastRaceResults);
+      gadgets.io.makeRequest(request, parseLastRaceResults, params);
     } else {
-      _IG_FetchContent(request, parseRaceResults);
+      gadgets.io.makeRequest(request, parseRaceResults, params);
     }
   }
   
   function getSelector() {
     if(year == "current") {
-      var scheduleRequest = root + "current.json";
-      _IG_FetchContent(scheduleRequest, parseCurrentSchedule);    
+      var request = root + "current.json";
+      gadgets.io.makeRequest(request, parseCurrentSchedule, params);
     } else {
       if(round == "last" && lastRounds[year] != null) round = lastRounds[year];
       var races = schedules[year];
       if(races != null && round != null) {
         var races = schedules[year];
-        if(races != null) {
-          drawSelector(year, round);
-          return;
-        }
+        drawSelector(year, round);
+	return;
       }
       var request = root + year + ".json";
-      _IG_FetchContent(request, parseSchedule);
+      gadgets.io.makeRequest(request, parseSchedule, params);
     }
   }
   
   function getNext() {
-    var nextRequest = root + "current/next.json";
-    _IG_FetchContent(nextRequest, parseNext);
+    var request = root + "current/next.json";
+    gadgets.io.makeRequest(request, parseNext, params);
   }
   
   function parseLastDriverStandings(json) {
-    if(json == null || json.length == 0) {
-      _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+    if(json.data == null) {
+      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var standingsList = response.MRData.StandingsTable.StandingsLists[0];
-      if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
+      var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
+      if(year == "current") {
+        currentYear = standingsList.season;
+	year = standingsList.season;
+      }
+      if(year == standingsList.season && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearDS = allDS[standingsList.season];
       if(yearDS == null) yearDS = new Array();
@@ -254,11 +256,10 @@
   }
   
   function parseDriverStandings(json) {
-    if(json == null || json.length == 0) {
-      _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+    if(json.data == null) {
+      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var standingsList = response.MRData.StandingsTable.StandingsLists[0];
+      var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
       var yearDS = allDS[standingsList.season];
       if(yearDS == null) yearDS = new Array();
       yearDS[standingsList.round] = standingsList;
@@ -268,12 +269,15 @@
   }
   
   function parseLastConstructorStandings(json) {
-    if(json == null || json.length == 0) {
-      _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+    if(json.data == null) {
+      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var standingsList = response.MRData.StandingsTable.StandingsLists[0];
-      if((year == standingsList.season || year == "current") && round == "last") round = standingsList.round;
+      var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
+      if(year == "current") {
+        currentYear = standingsList.season;
+	year = standingsList.season;
+      }
+      if(year == standingsList.season && round == "last") round = standingsList.round;
       lastRounds[standingsList.season] = standingsList.round;
       var yearCS = allCS[standingsList.season];
       if(yearCS == null) yearCS = new Array();
@@ -284,11 +288,10 @@
   }
   
   function parseConstructorStandings(json) {
-    if(json == null || json.length == 0) {
-      _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+    if(json.data == null) {
+      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var standingsList = response.MRData.StandingsTable.StandingsLists[0];
+      var standingsList = json.data.MRData.StandingsTable.StandingsLists[0];
       var yearCS = allCS[standingsList.season];
       if(yearCS == null) yearCS = new Array();
       yearCS[standingsList.round] = standingsList;
@@ -298,12 +301,15 @@
   }
   
   function parseLastRaceResults(json) {
-    if(json == null || json.length == 0) {
-      _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+    if(json.data == null) {
+      document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var race = response.MRData.RaceTable.Races[0];
-      if((year == race.season || year == "current") && round == "last") round = race.round;
+      var race = json.data.MRData.RaceTable.Races[0];
+      if(year == "current") {
+        currentYear = race.season;
+	year = race.season;
+      }
+      if(year == race.season && round == "last") round = race.round;
       lastRounds[race.season] = race.round;
       var yearRR = allRR[race.season];
       if(yearRR == null) yearRR = new Array();
@@ -314,11 +320,10 @@
   }
   
   function parseRaceResults(json) {
-    if(json == null || json.length == 0) {
-     _gel(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
+    if(json.data == null) {
+     document.getElementById(selectedTabId).innerHTML = "<i>Data unavailable.</i>";
     } else {
-      var response = parseJSON(json);
-      var race = response.MRData.RaceTable.Races[0];
+      var race = json.data.MRData.RaceTable.Races[0];
       var yearRR = allRR[race.season];
       if(yearRR == null) yearRR = new Array();
       yearRR[race.round] = race;
@@ -328,12 +333,11 @@
   }
 
   function parseCurrentSchedule(json) {
-    if(json != null || json.length == 0) {
-      var response = parseJSON(json);
-      year = response.MRData.RaceTable.season;
+    if(json.data != null) {
+      year = json.data.MRData.RaceTable.season;
       currentYear = year;
-      schedules[year] = response.MRData.RaceTable.Races;
-      numRounds[year] = response.MRData.RaceTable.Races.length;
+      schedules[year] = json.data.MRData.RaceTable.Races;
+      numRounds[year] = json.data.MRData.RaceTable.Races.length;
       drawSelector(year, round);
       switch(selectedTab) {
         case 0:
@@ -352,32 +356,28 @@
   }
   
   function parseSchedule(json) {
-    if(json != null || json.length == 0) {
-      var response = parseJSON(json);
-      schedules[response.MRData.RaceTable.season] = response.MRData.RaceTable.Races;
-      numRounds[response.MRData.RaceTable.season] = response.MRData.RaceTable.Races.length;
+    if(json.data != null) {
+      schedules[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races;
+      numRounds[json.data.MRData.RaceTable.season] = json.data.MRData.RaceTable.Races.length;
       drawSelector(year, round);
     }
   }
   
   function parseNext(json) {
-    if(json != null || json.length == 0) {
-      var response = parseJSON(json);
-      nextRace = response.MRData.RaceTable.Races[0];
+    if(json.data != null) {
+      nextRace = json.data.MRData.RaceTable.Races[0];
       drawNext();
+      gadgets.window.adjustHeight();
     }
   }
-  
-  function parseJSON(text) {
-    return !(/[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/.test(text.replace(/"(\\.|[^"\\])*"/g, ''))) && eval('(' + text + ')');
-  }
-  
+
   function drawDriverStandings(year, round) {
     var yearDS = allDS[year];
     if(yearDS != null) {
       standingsList = yearDS[round];
       if(standingsList != null) {
-        drawSelector(year, round);
+        // ?? drawSelector(year, round);
+	  getSelector();
         var standings = standingsList.DriverStandings;
         var list = "<table class=\"list\" width=\"100%\"><tr class=\"head\"><th>Pos</th><th>Driver</th><th>Constructor</th><th>Pts</th><th>Wins</th></tr>";
         var line = "odd";
@@ -400,10 +400,10 @@
           if(line == "odd") { line = "even"; } else { line = "odd"; }
         }
         list += "</table>";
-        _gel(selectedTabId).innerHTML = list;
+        document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(standings.length); 
-      }    
-    }  
+      }
+    }
   }
  
   function drawConstructorStandings(year, round) {
@@ -427,9 +427,9 @@
           if(line == "odd") { line = "even"; } else { line = "odd"; }
         }
         list += "</table>";
-        _gel(selectedTabId).innerHTML = list;
+        document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(standings.length); 
-      }    
+      }
     }  
   }
 
@@ -455,7 +455,7 @@
           if(line == "odd") { line = "even"; } else { line = "odd"; }
         }
         list += "</table>";
-        _gel(selectedTabId).innerHTML = list;
+        document.getElementById(selectedTabId).innerHTML = list;
         updateFooter(results.length);
       }
     }
@@ -491,32 +491,33 @@
             selector += "<tr></td><td class=\"round\">Round " + round + " of " + numRounds[year] + "</td>";
             selector += "</tr>";
             selector += "</table>";
-            _gel("selector").innerHTML = selector;
+            document.getElementById("selector").innerHTML = selector;
             return;
           }
         }
       }
+      gadgets.window.adjustHeight();
     }
   }
 
   function updateFooter(max) {
     if(offset + limit < max) {
-      _gel("down").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/down.png\" style=\"cursor: pointer\" onClick=\"javascript:pageDown()\" title=\"Page Down\" alt=\"Down\" />";
+      document.getElementById("down").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/down.png\" style=\"cursor: pointer\" onClick=\"javascript:pageDown()\" title=\"Page Down\" alt=\"Down\" />";
     } else {
-      _gel("down").innerHTML = "";
+      document.getElementById("down").innerHTML = "";
     }
     drawNext();
     if(offset > 0) {
-      _gel("up").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/up.png\" style=\"cursor: pointer\" onClick=\"javascript:pageUp()\" title=\"Page Up\" alt=\"Up\" />";
+      document.getElementById("up").innerHTML = "<img src=\"http://ergast.googlecode.com/svn/trunk/gadget/up.png\" style=\"cursor: pointer\" onClick=\"javascript:pageUp()\" title=\"Page Up\" alt=\"Up\" />";
     } else {
-      _gel("up").innerHTML = "";
-      _IG_AdjustIFrameHeight();
+      document.getElementById("up").innerHTML = "";
     }
+    gadgets.window.adjustHeight();
   }
 
   function drawNext() {
     if(nextRace != null) {
-      _gel("next").innerHTML = "<b>Next Race: </b><a href=\"" + nextRace.url + "\" target=\"_blank\" title=\"Race Preview\">" +  nextRace.raceName + "</a> (" + formatDate(nextRace.date) + ")";
+      document.getElementById("next").innerHTML = "<b>Next Race: </b><a href=\"" + nextRace.url + "\" target=\"_blank\" title=\"Race Preview\">" +  nextRace.raceName + "</a> (" + formatDate(nextRace.date) + ")";
     }
   }
 
@@ -582,14 +583,13 @@
   }
 
   function showLoading() {
-    _gel(selectedTabId).innerHTML = "<i>Loading...</i>";
-    _gel("down").innerHTML = "";
-    _gel("up").innerHTML = "";
-    _gel("next").innerHTML = "";
+    document.getElementById(selectedTabId).innerHTML = "<i>Loading...</i>";
+    document.getElementById("down").innerHTML = "";
+    document.getElementById("up").innerHTML = "";
+    document.getElementById("next").innerHTML = "";
   }
 
   function formatDate(date) {
-    //var nextYear = date.slice(0, 4);
     var nextMonth = date.slice(5, 7);
     var nextDay = date.slice(8, 10);
     return nextDay + "&nbsp;" + getMonth(nextMonth);
@@ -632,12 +632,11 @@
 <div id="footer">
   <table class="footer">
     <tr>
-      <td id="down" width="37"></td>
+      <td id="down" height="10" width="37"></td>
       <td id="next" style="text-align: center"></td>
-      <td id="up" width="37"></td>
+      <td id="up"  height="10" width="37"></td>
     </tr>
   </table>
 </div>
-]]>
-</Content> 
+]]></Content> 
 </Module>
