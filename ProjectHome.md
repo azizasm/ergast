@@ -1,0 +1,1 @@
+This Google Gadget lists Formula One standings and results obtained from the Ergast Motor Racing Data API: http://ergast.com/mrd
